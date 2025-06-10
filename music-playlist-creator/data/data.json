@@ -19,21 +19,29 @@
     {
     "id": 2,
     "theme": "Hip‑Hop Grooves",
-    "imageUrl": "images/hiphop-modern.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/hip-hop.jpg",
     "name": "Hip‑Hop Grooves",
     "creator": "Jamie",
     "likes": 35,
     "songs": [
-      { "title": "Alright", "artist": "Kendrick Lamar", "album": "To Pimp a Butterfly", "duration": "3:39" },
-      { "title": "SICKO MODE", "artist": "Travis Scott", "album": "ASTROWORLD", "duration": "5:12" },
-      { "title": "Rich Spirit", "artist": "Kendrick Lamar", "album": "Mr. Morale & the Big Steppers", "duration": "3:23" },
-      { "title": "Way 2 Sexy", "artist": "Drake ft. Future & Young Thug", "album": "Certified Lover Boy", "duration": "4:17" }
+        { "title": "Alright", "artist": "Kendrick Lamar", "album": "To Pimp a Butterfly", "duration": "3:39" },
+        { "title": "Rich Spirit", "artist": "Kendrick Lamar", "album": "Mr. Morale & the Big Steppers", "duration": "3:23" },
+        { "title": "Electric Relaxation", "artist": "A Tribe Called Quest", "album": "Midnight Marauders", "duration": "4:03" },
+        { "title": "The World Is Yours", "artist": "Nas", "album": "Illmatic", "duration": "4:50" },
+        { "title": "Respiration", "artist": "Black Star ft. Common", "album": "Black Star", "duration": "6:05" },
+        { "title": "Ms. Fat Booty", "artist": "Mos Def", "album": "Black on Both Sides", "duration": "3:43" },
+        { "title": "Runnin'", "artist": "The Pharcyde", "album": "Labcabincalifornia", "duration": "4:57" },
+        { "title": "Boom", "artist": "Royce da 5'9\"", "album": "Rock City (Version 2.0)", "duration": "3:58" },
+        { "title": "Mathematics", "artist": "Mos Def", "album": "Black on Both Sides", "duration": "4:06" },
+        { "title": "93 'Til Infinity", "artist": "Souls of Mischief", "album": "93 'til Infinity", "duration": "4:46" },
+        { "title": "Thieves in the Night", "artist": "Black Star", "album": "Mos Def & Talib Kweli Are Black Star", "duration": "4:03" },
+        { "title": "I Used to Love H.E.R.", "artist": "Common", "album": "Resurrection", "duration": "4:39" }
     ]
   },
   {
     "id": 3,
     "theme": "Old‑School ’90s R&B",
-    "imageUrl": "images/90s-rnb.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/rnb.png",
     "name": "Old‑School ’90s R&B",
     "creator": "Taylor",
     "likes": 40,
@@ -47,7 +55,7 @@
     {
     "id": 4,
     "theme": "Zouk & Kompa",
-    "imageUrl": "images/zouk-kompa.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/zouk-kompa.jpg",
     "name": "Haitian Zouk Vibes",
     "creator": "Riley",
     "likes": 28,
@@ -61,7 +69,7 @@
     {
     "id": 5,
     "theme": "Boom‑Bap Rap",
-    "imageUrl": "images/boom-bap.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/boom-bap.jpg",
     "name": "Boom‑Bap Classics",
     "creator": "Jordan",
     "likes": 37,
@@ -75,12 +83,14 @@
     {
     "id": 6,
     "theme": "House & Dance",
-    "imageUrl": "images/house-dance.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/house-dance.jpg",
     "name": "House & Dance Grooves",
     "creator": "Casey",
     "likes": 33,
     "songs": [
-        { "title": "Lalala", "artist": "bbno$ & Y2K", "album": "Lalala", "duration": "2:40" },
+        { "title": "Gabriel", "artist": "Roy Davis Jr. ft. Peven Everett", "album": "Gabriel", "duration": "5:40" },
+        { "title": "Follow Me", "artist": "Aly-Us", "album": "Follow Me", "duration": "4:35" },
+        { "title": "Music Sounds Better with You", "artist": "Stardust", "album": "Stardust", "duration": "6:43" },
         { "title": "10%", "artist": "KAYTRANADA ft. Kali Uchis", "album": "BUBBA", "duration": "3:40" },
         { "title": "BREAK MY SOUL", "artist": "Beyoncé", "album": "Renaissance", "duration": "4:38" },
         { "title": "Lite Spots", "artist": "KAYTRANADA", "album": "99.9%", "duration": "4:00" }
@@ -89,7 +99,7 @@
     {
     "id": 7,
     "theme": "Cleaning Sunday",
-    "imageUrl": "images/cleaning-sunday.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/sunday.png",
     "name": "Sunday Cleaning Vibes",
     "creator": "Sam",
     "likes": 48,
@@ -103,7 +113,7 @@
     {
     "id": 8,
     "theme": "Neo‑Soul Essentials",
-    "imageUrl": "images/neo-soul.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/soul.jpg",
     "name": "Neo‑Soul Essentials",
     "creator": "Taylor",
     "likes": 36,

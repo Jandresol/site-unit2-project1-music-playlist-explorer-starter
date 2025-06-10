@@ -120,22 +120,29 @@ async function togglePlay(title, artist, button) {
         return;
     }
 
-    if (currentlyPlaying === songKey) {
-        button.innerHTML = '<i class="fa-solid fa-play"></i>';
-        nowPlayingDiv.style.display = 'none';
-        currentlyPlaying = null;
-        currentButton = null;
-        pauseSpotify();
-    } else {
-        if (currentButton) currentButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+if (currentlyPlaying === songKey) {
+    button.innerHTML = '<i class="fa-solid fa-play"></i>';
+    button.parentElement.classList.remove('now-playing');
+    nowPlayingDiv.style.display = 'none';
+    currentlyPlaying = null;
+    currentButton = null;
+    pauseSpotify();
+} else {
+    // Reset previous button and card
+    if (currentButton) {
+        currentButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+        currentButton.parentElement.classList.remove('now-playing'); // <-- this line fixes your issue
+    }
 
-        button.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        nowPlayingText.textContent = `Now Playing: ${songKey}`;
-        nowPlayingDiv.style.display = 'block';
-        currentlyPlaying = songKey;
-        currentButton = button;
+    // Update current card
+    button.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    button.parentElement.classList.add('now-playing');
+    nowPlayingText.textContent = `Now Playing: ${songKey}`;
+    nowPlayingDiv.style.display = 'block';
+    currentlyPlaying = songKey;
+    currentButton = button;
 
-        await playSpotifyTrack(trackData.uri);
+    await playSpotifyTrack(trackData.uri);
     }
 }
 

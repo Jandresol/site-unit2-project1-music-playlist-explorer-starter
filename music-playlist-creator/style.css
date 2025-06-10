@@ -1,30 +1,36 @@
 :root {
-    --primary-color: #aaaaaa;
-    --secondary-color: #8a8a8a;
-    --background-color: #f8f8f8;
-    --text-color: #454545;
-    --highlight-color: #00bcd4;
+    --sunset-yellow: #FFD700;
+    --sunset-orange: #FF8C42;
+    --sunset-purple: #8B5A83;
+    --sunset-deep: #4A2C4A;
+    --background-light: #f6eee8;
+    --text-light: #FFFFFF;
+    --text-dark: #2D1B2E;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
+    background: linear-gradient(135deg, var(--background-light) 0%, #FFF5E6 100%);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-header, footer{
-    background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color);
-    color: var(--text-color);
+header, footer {
+    background: var(--sunset-orange);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+header:hover, footer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.3);
 }
 
 html, body {
@@ -33,23 +39,20 @@ html, body {
     height: 100%;
 }
 
-header{
+header {
     padding: 20px;
-
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
 }
 
-
-footer{
+footer {
     padding: 20px;
-    margin-top: auto; 
-
+    margin-top: auto;
 }
 
 #playlist-card-container {
@@ -63,22 +66,34 @@ footer{
     max-width: 1400px;
 }
 
-.playlist-cards{
-    background-color: var(--background-color);
+.playlist-cards {
+    background: linear-gradient(135deg, var(--background-light) 0%, #FFFFFF 100%);
     width: 280px;
     border-radius: 16px;
-    border: 1px solid var(--text-color);
+    border: 2px solid transparent;
     overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(139, 90, 131, 0.1);
 }
 
-.card-image{
+.playlist-cards:hover {
+    transform: translateY(-8px);
+    border-color: var(--sunset-orange);
+    box-shadow: 0 12px 30px rgba(139, 90, 131, 0.2);
+}
+
+.card-image {
     display: flex;
     height: 180px;
-    background-size: cover;       
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
 
-
+.playlist-cards:hover .card-image {
+    transform: scale(1.05);
 }
 
 .playlist-image img {
@@ -86,8 +101,8 @@ footer{
     height: 100%;
     object-fit: cover;
     display: block;
-    background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color)
+    background: linear-gradient(45deg, var(--sunset-yellow), var(--sunset-orange));
+    border: 1px solid var(--sunset-orange);
 }
 
 .playlist-text {
@@ -98,13 +113,23 @@ footer{
 .playlist-title {
     font-size: 1.25rem;
     margin: 0 0 0.5rem 0;
-    color: var(--text-color);
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+.playlist-cards:hover .playlist-title {
+    color: var(--sunset-purple);
 }
 
 .creator-name {
     font-size: 0.9rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+.playlist-cards:hover .creator-name {
+    color: var(--sunset-orange);
 }
 
 .like-container {
@@ -112,13 +137,21 @@ footer{
     align-items: center;
     justify-content: flex-start;
     padding: 0 1rem 1rem 1rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
 }
 
 .like-container i {
     margin-right: 6px;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.like-container i:hover {
+    color: var(--sunset-orange);
+    background-color: rgba(255, 140, 66, 0.1);
+    transform: scale(1.2);
 }
 
 /* CSS for Modal */
@@ -130,15 +163,16 @@ footer{
     top: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(74, 44, 74, 0.8);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: var(--background-color);
+    background: linear-gradient(135deg, var(--background-light) 0%, #FFFFFF 100%);
     margin: auto;
     padding: 30px;
-    border: 1px solid var(--secondary-color);
-    border-radius: 16px;
+    border: 2px solid var(--sunset-orange);
+    border-radius: 20px;
     width: 80%;
     max-width: 800px;
     max-height: 80vh;
@@ -146,19 +180,29 @@ footer{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    box-shadow: 0 20px 60px rgba(139, 90, 131, 0.3);
 }
 
 .close {
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: all 0.3s ease;
+    padding: 0; /* Remove padding */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close:hover {
-    color: var(--text-color);
+    color: var(--sunset-orange);
+    background-color: rgba(255, 140, 66, 0.1);
+    transform: rotate(90deg);
 }
 
 .modal-info {
@@ -173,7 +217,6 @@ footer{
     align-items: flex-start;
     padding: 10px 0;
     flex-wrap: wrap;
-
 }
 
 .modal-header > #playlist-image {
@@ -182,10 +225,17 @@ footer{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 12px;
-    border: 1px solid var(--secondary-color);
+    border-radius: 16px;
+    border: 3px solid var(--sunset-orange);
     flex-shrink: 0;
     background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.modal-header > #playlist-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.4);
 }
 
 #modal-header-text {
@@ -196,13 +246,13 @@ footer{
 
 #playlist-name {
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: var(--text-dark);
     margin: 0 0 8px 0;
 }
 
 #creator-name {
     font-size: 1rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     margin: 0;
 }
 
@@ -212,20 +262,24 @@ footer{
     gap: 12px;
     width: 100%;
     overflow-y: auto;
+    max-height: 400px;
+    margin-top: 40px;
 }
 
 .song-card {
     display: flex;
     align-items: center;
     padding: 12px;
-    background-color: var(--background-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+    background: linear-gradient(135deg, var(--background-light) 0%, #FFFFFF 100%);
+    border: 1px solid var(--sunset-orange);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .song-card:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 66, 0.1) 100%);
+    box-shadow: 0 4px 15px rgba(139, 90, 131, 0.2);
 }
 
 .song-info {
@@ -238,15 +292,19 @@ footer{
 .song-thumbnail {
     width: 50px;
     height: 50px;
-    background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 6px;
+    background: linear-gradient(45deg, var(--sunset-yellow), var(--sunset-orange));
+    border: 2px solid var(--sunset-orange);
+    border-radius: 8px;
     flex-shrink: 0;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease;
+}
 
+.song-card:hover .song-thumbnail {
+    transform: rotate(5deg);
 }
 
 .song-details {
@@ -255,49 +313,69 @@ footer{
 
 .song-title {
     font-size: 1rem;
-    color: var(--text-color);
+    color: var(--text-dark);
     margin: 0 0 4px 0;
     font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.song-card:hover .song-title {
+    color: var(--sunset-purple);
 }
 
 .song-artist {
     font-size: 0.9rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     margin: 0 0 2px 0;
+    transition: color 0.3s ease;
+}
+
+.song-card:hover .song-artist {
+    color: var(--sunset-orange);
 }
 
 .song-album {
     font-size: 0.85rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     margin: 0;
+    opacity: 0.8;
 }
 
 .song-duration {
     font-size: 0.9rem;
-    color: var(--secondary-color);
+    color: var(--sunset-purple);
     font-weight: 500;
     flex-shrink: 0;
 }
 
 .play-button {
-    background: none;
+    background: linear-gradient(135deg, var(--sunset-yellow) 0%, var(--sunset-orange) 100%);
     border: none;
-    color: var(--highlight-color);
+    color: var(--text-light);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 8px;
     border-radius: 50%;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
     margin-left: 12px;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 20px
+
 }
 
 .play-button:hover {
-    background-color: var(--primary-color);
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.5);
 }
 
 .now-playing {
-    background-color: rgba(0, 188, 212, 0.1);
-    border-color: var(--highlight-color);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 140, 66, 0.2) 100%);
+    border-color: var(--sunset-orange);
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
 }
 
 .now-playing-indicator {
@@ -305,12 +383,18 @@ footer{
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
-    padding: 12px 20px;
+    background: var(--sunset-deep);
+    border: 2px solid var(--sunset-purple);
+    border-radius: 12px;
+    padding: 15px 25px;
     display: none;
     z-index: 1001;
-    color: white;
+    color: var(--text-light);
+    box-shadow: 0 8px 25px rgba(139, 90, 131, 0.4);
+    transition: all 0.3s ease;
 }
 
+.now-playing-indicator:hover {
+    transform: translateX(-50%) translateY(-5px);
+    box-shadow: 0 12px 35px rgba(139, 90, 131, 0.6);
+}
