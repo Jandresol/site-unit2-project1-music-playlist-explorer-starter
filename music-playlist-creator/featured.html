@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:ital,wght@0,100..900;1,100..900&family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Music Playlist Explorer</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Music Playlist Explorer</h1>
+            <div class="nav-buttons">
+                <a class="nav-btn" id="all-playlists-btn" href="index.html">
+                    <i class="fa-solid fa-music"></i>
+                    All Playlists
+                </a>
+                <a class="nav-btn active" id="featured-btn" href="featured.html">
+                    <i class="fa-solid fa-star"></i>
+                    Featured
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Featured Playlist</h1>
+            <button class="new-feature-btn" id="new-feature-btn">
+                <i class="fa-solid fa-repeat"></i>
+                New Feature
+            </button>
+        </div>
+
+        <div class="featured-playlist-card">
+            <div class="playlist-hero" id="playlist-hero-bg" style="background-image: url('...')">
+                <div class="playlist-hero-content">
+                    <h2 class="featured-playlist-title" id="featured-title">Sunset Vibes</h2>
+                    <p class="featured-creator-name" id="featured-creator">Created by DJ Sunset</p>
+                        <button id="shuffle-button">
+                            <i class="fa-solid fa-shuffle"></i>
+                            Shuffle
+                        </button>
+                </div>
+            </div>
+
+        <div class="featured-songs-container" id="featured-songs-container">
+            <!-- JS will inject songs here -->
+        </div>
+    </main>
+        <div id="now-playing" class="now-playing-indicator">
+            <span id="now-playing-text">Now Playing: </span>
+        </div>
+
+    <footer>
+        <!-- Optional Footer Content -->
+    </footer>
+
+    <script type="module" src="featured.js"></script>
+</body>
+</html>

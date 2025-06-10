@@ -5,56 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:ital,wght@0,100..900;1,100..900&family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <title>Music Playlist Explorer</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     
     <link rel="stylesheet" href="style.css">
+    
 </head>
-<body>
-    <header>
-        <h2>Music Playlist Explorer</h2>
-    </header>
-
-    <main> 
-        <section id="playlist-card-container"></section>
-    </main>
-
-    <div id="playlistModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-info">
-                <div class="modal-header">
-                    <img id="playlist-image"/>
-                    <div id="modal-header-text">
-                        <h3 id="playlist-name"></h3>
-                        <h5 id="creator-name"></h5>
-                    </div>
-                </div>
-                <div class="controls">
-                    <select id="sort-dropdown">
-                        <option value="default">Sort by...</option>
-                        <option value="name">Name (A-Z)</option>
-                        <option value="creator">Creator</option>
-                        <option value="likes">Most Liked</option>
-                    </select>
-                    <button id="shuffle-button">
-                        <i class="fa-solid fa-shuffle"></i>
-                        Shuffle
-                    </button>
+    <body>
+        <header>
+            <div class="header-content">
+                <h1>Music Playlist Explorer</h1>
+                <div class="nav-buttons">
+                    <a class="nav-btn active" id="all-playlists-btn" href="index.html">
+                        <i class="fa-solid fa-music"></i>
+                        All Playlists
+                    </a>
+                    <a class="nav-btn" id="featured-btn" href="featured.html">
+                        <i class="fa-solid fa-star"></i>
+                        Featured
+                    </a>
                 </div>
             </div>
-            <div id="songs"></div>
+        </header>
+        <main> 
+            <div class="homepage-text">
+                <h1>Discover Amazing Playlists</h1>
+                <h3>Explore Our Collection of Curated Playlists</h5>
+            </div>
+            <div class="controls">
+                <select id="sort-dropdown">
+                    <option value="default">Sort by...</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="creator">Creator</option>
+                    <option value="likes">Most Liked</option>
+                </select>
+            </div>
+
+            <section id="playlist-card-container"></section>
+        </main>
+
+        <div id="playlistModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-info">
+                    <div class="modal-header">
+                        <img id="playlist-image"/>
+                        <div id="modal-header-text">
+                            <h3 id="playlist-name"></h3>
+                            <h5 id="creator-name"></h5>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <select id="sort-dropdown">
+                            <option value="default">Sort by...</option>
+                            <option value="name">Name (A-Z)</option>
+                            <option value="creator">Creator</option>
+                            <option value="likes">Most Liked</option>
+                        </select>
+                        <button id="shuffle-button">
+                            <i class="fa-solid fa-shuffle"></i>
+                            Shuffle
+                        </button>
+                    </div>
+                </div>
+                <div id="songs"></div>
+            </div>
         </div>
-    </div>
-    <div id="now-playing" class="now-playing-indicator">
-        <span id="now-playing-text">Now Playing: </span>
-    </div>
+        <div id="now-playing" class="now-playing-indicator">
+            <span id="now-playing-text">Now Playing: </span>
+        </div>
 
-    <footer>
-        <!-- Your footer content here -->
-    </footer>
-    <script src="script.js"></script>
+        <footer>
+        </footer>
+        <script src="script.js"></script>
 
-</body>
-</html>
+    </body>
+    </html>

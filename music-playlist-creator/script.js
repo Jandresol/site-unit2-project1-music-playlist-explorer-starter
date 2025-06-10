@@ -7,7 +7,7 @@ const nowPlayingDiv = document.getElementById('now-playing');
 const nowPlayingText = document.getElementById('now-playing-text');
 let currentPlaylist = null;
 
-const SPOTIFY_TOKEN = 'BQBQNfq-E33vfJ5rXT5PZnWpLmMtlRkVn6iO2AmRJn5G4kI5-T2G8MPNPvLiameE_nsCK44AjTE0zNURjtv_77DbJ643Q0_b2eryur0QMUsl9Ycv9C_l55PiQrRuVVTLihqdLnRznGE'; 
+const SPOTIFY_TOKEN = 'BQDXJ2cxgudsaX16QV2fhFYfro9J1EXg-69llAPenk8NMJk98x493uhdW20ouLABqKHsxNRfOQQ2Qs0cNmQwqcmfDPvkdIHtl9Pg0xR4ewr0701btusV66-d3f4Hx28_OM6aNmjGgWI'; 
 
 function openModal(playlist) {
     currentPlaylist = playlist;
@@ -72,6 +72,11 @@ fetch("data/data.json")
                     <i class="fa-regular fa-heart"></i>
                     <p class="like-count">${playlist.likes}</p>
                 </div>
+                <div class="playlist-controls">
+                    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                </div>
+
             `;
 
             card.style.cursor = "pointer";
@@ -93,6 +98,41 @@ fetch("data/data.json")
             });
 
             container.appendChild(card);
+
+            const editButton = card.querySelector(".edit-button");
+            const deleteButton = card.querySelector(".delete-button");
+
+            // Edit logic
+            editButton.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const newName = prompt("Enter new playlist name:", playlist.name);
+                if (newName && newName.trim() !== "") {
+                    playlist.name = newName;
+                    card.querySelector(".playlist-title").textContent = newName;
+
+                    // Optional: update modal if it's open
+                    if (currentPlaylist === playlist) {
+                        document.getElementById('playlist-name').innerText = newName;
+                    }
+
+                    // Save to localStorage or backend if needed
+                }
+            });
+
+            // Delete logic
+            deleteButton.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const confirmDelete = confirm("Are you sure you want to delete this playlist?");
+                if (confirmDelete) {
+                    container.removeChild(card);
+
+                    // Optional: remove from playlist array if needed
+                    // playlists = playlists.filter(p => p !== playlist);
+
+                    // Save changes to localStorage or backend if needed
+                }
+            });
+
         });
     });
 
@@ -182,3 +222,4 @@ async function pauseSpotify() {
         headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
     });
 }
+
