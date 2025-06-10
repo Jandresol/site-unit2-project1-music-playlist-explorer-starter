@@ -6,6 +6,8 @@ const container = document.getElementById("playlist-card-container");
 const nowPlayingDiv = document.getElementById('now-playing');
 const nowPlayingText = document.getElementById('now-playing-text');
 let currentPlaylist = null;
+let playlists = [];
+let filteredPlaylists = [];
 
 const SPOTIFY_TOKEN = 'BQDXJ2cxgudsaX16QV2fhFYfro9J1EXg-69llAPenk8NMJk98x493uhdW20ouLABqKHsxNRfOQQ2Qs0cNmQwqcmfDPvkdIHtl9Pg0xR4ewr0701btusV66-d3f4Hx28_OM6aNmjGgWI'; 
 
@@ -58,8 +60,15 @@ window.onclick = (e) => {
 
 fetch("data/data.json")
     .then(res => res.json())
-    .then(playlists => {
-        playlists.forEach(playlist => {
+    .then(data => {
+        playlists = data;
+        filteredPlaylists = [...playlists];
+        renderPlaylists();
+    });
+
+function renderPlaylists() {
+    container.innerHTML = '';
+            filteredPlaylists.forEach(playlist => {
             const card = document.createElement("div");
             card.classList.add("playlist-cards");
             card.innerHTML = `
@@ -68,13 +77,15 @@ fetch("data/data.json")
                     <h3 class="playlist-title">${playlist.name}</h3>
                     <h5 class="creator-name">Created by ${playlist.creator}</h5>
                 </div>
-                <div class="like-container">
-                    <i class="fa-regular fa-heart"></i>
-                    <p class="like-count">${playlist.likes}</p>
-                </div>
-                <div class="playlist-controls">
-                    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                <div class="playlist-bottom">
+                    <div class="like-container">
+                        <i class="fa-regular fa-heart"></i>
+                        <p class="like-count">${playlist.likes}</p>
+                    </div>
+                    <div class="playlist-controls">
+                        <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                    </div>
                 </div>
 
             `;
@@ -134,7 +145,8 @@ fetch("data/data.json")
             });
 
         });
-    });
+
+}
 
 function shuffleSongs(playlist) {
     const songsContainer = document.getElementById('songs');
@@ -222,4 +234,43 @@ async function pauseSpotify() {
         headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
     });
 }
+
+// Search functionality
+document.getElementById('search-input').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    filteredPlaylists = playlists.filter(playlist => 
+        playlist.name.toLowerCase().includes(searchTerm) ||
+        playlist.creator.toLowerCase().includes(searchTerm) ||
+        playlist.songs.some(song => 
+            song.title.toLowerCase().includes(searchTerm) ||
+            song.artist.toLowerCase().includes(searchTerm)
+        )
+    );
+    renderPlaylists();
+});
+
+// Sort functionality
+document.getElementById('sort-dropdown').addEventListener('change', (e) => {
+    const sortBy = e.target.value;
+    if (sortBy === 'name') {
+        filteredPlaylists.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'creator') {
+        filteredPlaylists.sort((a, b) => a.creator.localeCompare(b.creator));
+    } else if (sortBy === 'likes') {
+        filteredPlaylists.sort((a, b) => b.likes - a.likes);
+    } else if (sortBy === 'recent') {
+        filteredPlaylists.sort((a, b) => b.id - a.id);
+    }
+    renderPlaylists();
+});
+
+// Add playlist button
+document.getElementById('add-playlist-btn').addEventListener('click', () => {
+    alert('Add Playlist functionality would be implemented here!');
+});
+
+// Shuffle button in modal
+document.getElementById('shuffle-button').addEventListener('click', () => {
+    alert('Shuffle functionality would be implemented here!');
+});
 

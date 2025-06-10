@@ -52,7 +52,6 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
 
 }
 
@@ -101,20 +100,14 @@ header {
         border-color: var(--sunset-yellow);
     }
 
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 40px 20px;
-        flex: 1;
-    }
-
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
+    flex: 1;
 }
+
 
 footer {
     padding: 20px;
@@ -175,12 +168,14 @@ footer {
     width: 100%; /* Remove fixed width, let grid control it */
     min-width: 280px; /* Maintain minimum size */
     border-radius: 16px;
-    border: 2px solid transparent;
+    border: 2px solid var(--background-light);
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(139, 90, 131, 0.1);
     aspect-ratio: 1; /* Keep cards square as they scale */
+    display: flex;
+    flex-direction: column;
 }
 
 .playlist-cards:hover {
@@ -213,6 +208,8 @@ footer {
 
 .playlist-text {
     padding: 1rem;
+    margin: 20px;
+    margin-bottom: 0px;
     text-align: left;
 }
 
@@ -242,7 +239,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0rem 1rem;
     color: var(--sunset-purple);
 }
 
@@ -252,6 +249,8 @@ footer {
     transition: all 0.3s ease;
     padding: 4px;
     border-radius: 50%;
+    font-size: 20px;
+
 }
 
 .like-container i:hover {
@@ -264,22 +263,28 @@ footer {
     font-weight: bold;
 }
 
+.playlist-bottom{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 0px 20px;
+    justify-content: space-between;
+}
 .playlist-controls {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin: 20px;
 }
 
 .edit-button, .delete-button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 20px;
     color: #444;
 }
 
 .edit-button:hover, .delete-button:hover {
-    color: #e74c3c;
+    color: #ff5e4c;
 }
 
 /* CSS for Modal */
@@ -934,5 +939,55 @@ footer {
     .page-header{
         display: flex;
         flex-direction: column;
+    }
+}
+
+.search-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    background: white;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+.search-bar i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .search-controls {
+        width: 80%;
+        flex-direction: column;
+        gap: 15px;
     }
 }

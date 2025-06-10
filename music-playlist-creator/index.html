@@ -36,16 +36,24 @@
                 <h1>Discover Amazing Playlists</h1>
                 <h3>Explore Our Collection of Curated Playlists</h5>
             </div>
-            <div class="controls">
-                <select id="sort-dropdown">
-                    <option value="default">Sort by...</option>
-                    <option value="name">Name (A-Z)</option>
-                    <option value="creator">Creator</option>
-                    <option value="likes">Most Liked</option>
-                </select>
+            <div class="search-controls">
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search playlists, songs, or artists...">
+                </div>
+                <div class="controls">
+                    <select id="sort-dropdown">
+                        <option value="default">Sort by...</option>
+                        <option value="name">Name (A-Z)</option>
+                        <option value="creator">Creator</option>
+                        <option value="likes">Most Liked</option>
+                        <option value="recent">Recently Added</option>
+                    </select>
+                </div>
             </div>
+        </div>
 
-            <section id="playlist-card-container"></section>
+        <section id="playlist-card-container"></section>
         </main>
 
         <div id="playlistModal" class="modal">
