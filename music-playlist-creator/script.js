@@ -1,54 +1,58 @@
+// import { SPOTIFY_TOKEN } from './config.js';
+
 const modal = document.getElementById("playlistModal");
 const span = document.getElementsByClassName("close")[0];
 const container = document.getElementById("playlist-card-container");
+const nowPlayingDiv = document.getElementById('now-playing');
+const nowPlayingText = document.getElementById('now-playing-text');
 let currentPlaylist = null;
+
+const SPOTIFY_TOKEN = 'BQAaydXK_jEzLvW7PpaoOMXIX7S7xJQCdWJ6HMi9tDn8BxRdtAfrI2yzdT9E8YZYD26F28_kfCsva6YkUrN4fR0Rpnl5VeW7rAA0YSf_PnSoEhqbdJV7jrwCGQ62pGLBKvhAKEhHszM'; 
 
 function openModal(playlist) {
     currentPlaylist = playlist;
-    // Set playlist header info
-    document.getElementById('playlist-image').src = playlist.imageUrl;
+    document.getElementById('playlist-image').style.backgroundImage = `url('${playlist.imageUrl}')`;
     document.getElementById('playlist-name').innerText = playlist.name;
     document.getElementById('creator-name').innerText = playlist.creator;
 
-    // Clear any existing songs
     const songsContainer = document.getElementById('songs');
     songsContainer.innerHTML = '';
 
-    // Add each song to the modal
-    playlist.songs.forEach(song => {
+    playlist.songs.forEach(async song => {
         const songCard = document.createElement('div');
         songCard.className = 'song-card';
 
+        const spotifyData = await searchSongAndGetImage(song.title, song.artist);
+
         songCard.innerHTML = `
-        <div class="song-info">
-            <div class="song-thumbnail"></div>
-            <div class="song-details">
-            <p class="song-title">${song.title}</p>
-            <p class="song-artist">${song.artist}</p>
-            <p class="song-album">${song.album}</p>
+            <div class="song-info">
+                <div class="song-thumbnail">
+                    <img src="${spotifyData?.imageUrl || ''}" alt="Album Cover" style="width:60px;height:60px;object-fit:cover;">
+                </div>
+                <div class="song-details">
+                    <p class="song-title">${song.title}</p>
+                    <p class="song-artist">${song.artist}</p>
+                    <p class="song-album">${song.album}</p>
+                </div>
             </div>
-        </div>
-        <div class="song-duration">${song.duration || '0:00'}</div>
+            <button class="play-button" onclick="togglePlay('${song.title}', '${song.artist}', this)">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <div class="song-duration">${song.duration || '0:00'}</div>
         `;
 
+        songCard.dataset.uri = spotifyData?.uri || '';
         songsContainer.appendChild(songCard);
     });
 
-    // Show the modal
     modal.style.display = "block";
-    }
+}
 
-    // Close modal on (x)
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+span.onclick = () => modal.style.display = "none";
 
-// Close modal on outside click
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    }
+window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+};
 
 fetch("data/data.json")
     .then(res => res.json())
@@ -56,9 +60,8 @@ fetch("data/data.json")
         playlists.forEach(playlist => {
             const card = document.createElement("div");
             card.classList.add("playlist-cards");
-
             card.innerHTML = `
-                <div class="playlist-image" style="background-image: url('${playlist.imageUrl}');"></div>
+                <div class="card-image" style="background-image: url('${playlist.imageUrl}');"></div>
                 <div class="playlist-text">
                     <h3 class="playlist-title">${playlist.name}</h3>
                     <h5 class="creator-name">Created by ${playlist.creator}</h5>
@@ -69,73 +72,104 @@ fetch("data/data.json")
                 </div>
             `;
 
-            // Set up modal open on card click
             card.style.cursor = "pointer";
             card.addEventListener("click", () => openModal(playlist));
 
-            // Set up like button
             const likeContainer = card.querySelector(".like-container");
             const heartIcon = likeContainer.querySelector("i");
             const likeCount = likeContainer.querySelector(".like-count");
             let liked = false;
 
             likeContainer.addEventListener("click", (event) => {
-                event.stopPropagation(); // prevent modal from opening
-
+                event.stopPropagation();
                 liked = !liked;
 
-                if (liked) {
-                    heartIcon.classList.remove("fa-regular");
-                    heartIcon.classList.add("fa-solid");
-                    playlist.likes += 1;
-                } else {
-                    heartIcon.classList.remove("fa-solid");
-                    heartIcon.classList.add("fa-regular");
-                    playlist.likes -= 1;
-                }
-
+                heartIcon.classList.toggle("fa-regular", !liked);
+                heartIcon.classList.toggle("fa-solid", liked);
+                playlist.likes += liked ? 1 : -1;
                 likeCount.textContent = playlist.likes;
             });
 
             container.appendChild(card);
         });
-    })
-    .catch(err => console.error("Failed to fetch JSON:", err));
+    });
 
 function shuffleSongs(playlist) {
     const songsContainer = document.getElementById('songs');
-    const songList = playlist.songs;
-    for (var i = songList.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = songList[i];
-        songList[i] = songList[j];
-        songList[j] = temp;
+    for (let i = playlist.songs.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [playlist.songs[i], playlist.songs[j]] = [playlist.songs[j], playlist.songs[i]];
     }
 
-    // Clear current songs
-    songsContainer.innerHTML = '';
-
-    // Render shuffled songs
-    playlist.songs.forEach(song => {
-        const songCard = document.createElement('div');
-        songCard.className = 'song-card';
-
-        songCard.innerHTML = `
-            <div class="song-info">
-                <div class="song-thumbnail"></div>
-                <div class="song-details">
-                    <p class="song-title">${song.title}</p>
-                    <p class="song-artist">${song.artist}</p>
-                    <p class="song-album">${song.album}</p>
-                </div>
-            </div>
-            <div class="song-duration">${song.duration || '0:00'}</div>
-        `;
-
-        songsContainer.appendChild(songCard);
-    });
+    openModal(playlist);
 }
 
 document.getElementById("shuffle-button").addEventListener("click", () => {
     if (currentPlaylist) shuffleSongs(currentPlaylist);
 });
+
+let currentlyPlaying = null;
+let currentButton = null;
+
+async function togglePlay(title, artist, button) {
+    const songKey = `${title} - ${artist}`;
+    const trackData = await searchSongAndGetImage(title, artist);
+
+    if (!trackData || !trackData.uri) {
+        alert("Spotify track not found.");
+        return;
+    }
+
+    if (currentlyPlaying === songKey) {
+        button.innerHTML = '<i class="fa-solid fa-play"></i>';
+        nowPlayingDiv.style.display = 'none';
+        currentlyPlaying = null;
+        currentButton = null;
+        pauseSpotify();
+    } else {
+        if (currentButton) currentButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+
+        button.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        nowPlayingText.textContent = `Now Playing: ${songKey}`;
+        nowPlayingDiv.style.display = 'block';
+        currentlyPlaying = songKey;
+        currentButton = button;
+
+        await playSpotifyTrack(trackData.uri);
+    }
+}
+
+async function searchSongAndGetImage(title, artist) {
+    const query = encodeURIComponent(`${title} ${artist}`);
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
+        headers: { Authorization: `Bearer ${SPOTIFY_TOKEN}` }
+    });
+
+    const data = await response.json();
+    if (data.tracks.items.length > 0) {
+        const track = data.tracks.items[0];
+        return {
+            imageUrl: track.album.images[0]?.url,
+            uri: track.uri
+        };
+    }
+    return null;
+}
+
+async function playSpotifyTrack(uri) {
+    await fetch(`https://api.spotify.com/v1/me/player/play`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${SPOTIFY_TOKEN}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ uris: [uri] })
+    });
+}
+
+async function pauseSpotify() {
+    await fetch(`https://api.spotify.com/v1/me/player/pause`, {
+        method: "PUT",
+        headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
+    });
+}

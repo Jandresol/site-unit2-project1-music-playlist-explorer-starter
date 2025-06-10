@@ -71,11 +71,14 @@ footer{
     overflow: hidden;
 }
 
-.playlist-image{
+.card-image{
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 180px;
+    background-size: cover;       
+    background-position: center; 
+    background-repeat: no-repeat; 
+
+
 }
 
 .playlist-image img {
@@ -176,7 +179,6 @@ footer{
 .modal-header > #playlist-image {
     width: 200px;
     height: 200px;
-    background-image: url("/music-playlist-creator/assets/img/playlist.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -240,6 +242,11 @@ footer{
     border: 1px solid var(--secondary-color);
     border-radius: 6px;
     flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .song-details {
@@ -271,3 +278,39 @@ footer{
     font-weight: 500;
     flex-shrink: 0;
 }
+
+.play-button {
+    background: none;
+    border: none;
+    color: var(--highlight-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    margin-left: 12px;
+}
+
+.play-button:hover {
+    background-color: var(--primary-color);
+}
+
+.now-playing {
+    background-color: rgba(0, 188, 212, 0.1);
+    border-color: var(--highlight-color);
+}
+
+.now-playing-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: none;
+    z-index: 1001;
+    color: white;
+}
+

@@ -2,7 +2,7 @@
     {
     "id": 1,
     "theme": "R&B Chill Vibes",
-    "imageUrl": "images/rnb-chill.jpg",
+    "imageUrl": "/music-playlist-creator/assets/img/chill-vibe.png",
     "name": "R&B Chill Vibes",
     "creator": "Alex",
     "likes": 42,

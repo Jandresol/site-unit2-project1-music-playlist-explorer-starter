@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
     <title>Music Playlist Explorer</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
@@ -24,7 +25,7 @@
             <span class="close">&times;</span>
             <div class="modal-info">
                 <div class="modal-header">
-                    <img id="playlist-image" src="" alt="Playlist Image"/>
+                    <img id="playlist-image"/>
                     <div id="modal-header-text">
                         <h3 id="playlist-name"></h3>
                         <h5 id="creator-name"></h5>
@@ -45,6 +46,9 @@
             </div>
             <div id="songs"></div>
         </div>
+    </div>
+    <div id="now-playing" class="now-playing-indicator">
+        <span id="now-playing-text">Now Playing: </span>
     </div>
 
     <footer>
