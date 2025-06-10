@@ -1,24 +1,25 @@
 [
     {
-    "id": 1,
-    "theme": "R&B Chill Vibes",
-    "imageUrl": "/music-playlist-creator/assets/img/chill-vibe.png",
-    "name": "R&B Chill Vibes",
-    "creator": "Alex",
-    "likes": 42,
-    "songs": [
+        "id": 1,
+        "theme": "R&B",
+        "imageUrl": "/music-playlist-creator/assets/img/chill-vibe.png",
+        "name": "R&B Chill Vibes",
+        "creator": "Alex",
+        "likes": 42,
+        "songs": [
         { "title": "Kitchen", "artist": "SZA", "album": "SOS", "duration": "3:05" },
         { "title": "I Want You Around", "artist": "Snoh Aalegra", "album": "Ugh, Those Feels Again", "duration": "3:47" },
         { "title": "On It (feat. Ari Lennox)", "artist": "Jazmine Sullivan", "album": "Heaux Tales", "duration": "3:30" },
         { "title": "Thinkin Bout You", "artist": "Frank Ocean", "album": "channel ORANGE", "duration": "3:20" },
         { "title": "The Worst", "artist": "Jhené Aiko", "album": "Sail Out", "duration": "4:14" },
-        { "title": "luther (with SZA)", "artist": "Kendrick Lamar, SZA", "album": "project", "duration": "2:58" }
-
-    ]
+        { "title": "luther (with SZA)", "artist": "Kendrick Lamar, SZA", "album": "project", "duration": "2:58" },
+        { "title": "Get You", "artist": "Daniel Caesar", "album": "Freudian", "duration": "4:38" },
+        { "title": "Come Through", "artist": "H.E.R. feat. Chris Brown", "album": "Back of My Mind", "duration": "3:34" }
+        ]
     },
     {
     "id": 2,
-    "theme": "Hip‑Hop Grooves",
+    "theme": "Hip‑Hop",
     "imageUrl": "/music-playlist-creator/assets/img/hip-hop.jpg",
     "name": "Hip‑Hop Grooves",
     "creator": "Jamie",
@@ -40,7 +41,7 @@
   },
   {
     "id": 3,
-    "theme": "Old‑School ’90s R&B",
+    "theme": "R&B",
     "imageUrl": "/music-playlist-creator/assets/img/rnb.png",
     "name": "Old‑School ’90s R&B",
     "creator": "Taylor",
@@ -49,79 +50,102 @@
       { "title": "Creep", "artist": "TLC", "album": "CrazySexyCool", "duration": "4:27" },
       { "title": "Are You That Somebody", "artist": "Aaliyah", "album": "Dr. Dolittle OST", "duration": "4:27" },
       { "title": "Weak", "artist": "SWV", "album": "It's About Time", "duration": "4:52" },
-      { "title": "If I Ever Fall In Love", "artist": "Shai", "album": "Shai", "duration": "3:50" }
+      { "title": "If I Ever Fall In Love", "artist": "Shai", "album": "Shai", "duration": "3:50" },
+      { "title": "Water Runs Dry", "artist": "Boyz II Men", "album": "II", "duration": "3:22" },
+      { "title": "Kissin' You", "artist": "Total", "album": "Total", "duration": "3:49" },
+      { "title": "Can We Talk", "artist": "Tevin Campbell", "album": "I'm Ready", "duration": "4:45" },
+      { "title": "No Scrubs", "artist": "TLC", "album": "FanMail", "duration": "3:39" }
     ]
-    },
-    {
+  },
+  {
     "id": 4,
-    "theme": "Zouk & Kompa",
+    "theme": "Island",
     "imageUrl": "/music-playlist-creator/assets/img/zouk-kompa.jpg",
-    "name": "Haitian Zouk Vibes",
+    "name": "Haitian Zouk Mix",
     "creator": "Riley",
     "likes": 28,
     "songs": [
-        { "title": "Fan'm Kolokinte", "artist": "Zin", "album": "Zouk All Stars", "duration": "4:20" },
-        { "title": "Ou Se", "artist": "Carimi", "album": "Buzz", "duration": "4:10" },
-        { "title": "An Ti Fanm", "artist": "Kassav'", "album": "Love and Ka Dance", "duration": "5:00" },
-        { "title": "Lanmou Sa a", "artist": "T-Vice", "album": "Kité'm Viv", "duration": "4:45" }
+      { "title": "Fan'm Kolokinte", "artist": "Zin", "album": "Zouk All Stars", "duration": "4:20" },
+      { "title": "Ou Se", "artist": "Carimi", "album": "Buzz", "duration": "4:10" },
+      { "title": "An Ti Fanm", "artist": "Kassav'", "album": "Love and Ka Dance", "duration": "5:00" },
+      { "title": "Lanmou Sa a", "artist": "T-Vice", "album": "Kité'm Viv", "duration": "4:45" },
+      { "title": "Se Pa Pou Dat", "artist": "Kreyol La", "album": "Next Level", "duration": "4:53" },
+      { "title": "Avan Ou Ale", "artist": "Jocelyne Labylle", "album": "Roots Chic Tambour Bling-Bling", "duration": "4:33" },
+      { "title": "Bel Pawol", "artist": "Harmonik", "album": "Harmonik", "duration": "5:05" },
+      { "title": "Zouk La Sé Sel Médikaman Nou Ni", "artist": "Kassav’", "album": "Yélélé", "duration": "4:00" }
     ]
-    },
-    {
+  },
+  {
     "id": 5,
-    "theme": "Boom‑Bap Rap",
+    "theme": "Hip-Hop",
     "imageUrl": "/music-playlist-creator/assets/img/boom-bap.jpg",
     "name": "Boom‑Bap Classics",
     "creator": "Jordan",
     "likes": 37,
     "songs": [
-        { "title": "N.Y. State of Mind", "artist": "Nas", "album": "Illmatic", "duration": "4:54" },
-        { "title": "The World Is Yours", "artist": "Nas", "album": "Illmatic", "duration": "4:50" },
-        { "title": "Mathematics", "artist": "Mos Def", "album": "Black on Both Sides", "duration": "4:00" },
-        { "title": "Accordion", "artist": "Madvillain", "album": "Madvillainy", "duration": "1:58" }
+      { "title": "N.Y. State of Mind", "artist": "Nas", "album": "Illmatic", "duration": "4:54" },
+      { "title": "The World Is Yours", "artist": "Nas", "album": "Illmatic", "duration": "4:50" },
+      { "title": "Mathematics", "artist": "Mos Def", "album": "Black on Both Sides", "duration": "4:00" },
+      { "title": "Accordion", "artist": "Madvillain", "album": "Madvillainy", "duration": "1:58" },
+      { "title": "Mass Appeal", "artist": "Gang Starr", "album": "Hard to Earn", "duration": "3:40" },
+      { "title": "Full Clip", "artist": "Gang Starr", "album": "Full Clip: A Decade of Gang Starr", "duration": "3:36" },
+      { "title": "One Love", "artist": "Nas", "album": "Illmatic", "duration": "5:24" },
+      { "title": "The Blast", "artist": "Talib Kweli & Hi-Tek", "album": "Reflection Eternal", "duration": "3:06" }
     ]
-    },
-    {
+  },
+  {
     "id": 6,
-    "theme": "House & Dance",
+    "theme": "Dance",
     "imageUrl": "/music-playlist-creator/assets/img/house-dance.jpg",
     "name": "House & Dance Grooves",
     "creator": "Casey",
     "likes": 33,
     "songs": [
-        { "title": "Gabriel", "artist": "Roy Davis Jr. ft. Peven Everett", "album": "Gabriel", "duration": "5:40" },
-        { "title": "Follow Me", "artist": "Aly-Us", "album": "Follow Me", "duration": "4:35" },
-        { "title": "Music Sounds Better with You", "artist": "Stardust", "album": "Stardust", "duration": "6:43" },
-        { "title": "10%", "artist": "KAYTRANADA ft. Kali Uchis", "album": "BUBBA", "duration": "3:40" },
-        { "title": "BREAK MY SOUL", "artist": "Beyoncé", "album": "Renaissance", "duration": "4:38" },
-        { "title": "Lite Spots", "artist": "KAYTRANADA", "album": "99.9%", "duration": "4:00" }
+      { "title": "Gabriel", "artist": "Roy Davis Jr. ft. Peven Everett", "album": "Gabriel", "duration": "5:40" },
+      { "title": "Follow Me", "artist": "Aly-Us", "album": "Follow Me", "duration": "4:35" },
+      { "title": "Music Sounds Better with You", "artist": "Stardust", "album": "Stardust", "duration": "6:43" },
+      { "title": "10%", "artist": "KAYTRANADA ft. Kali Uchis", "album": "BUBBA", "duration": "3:40" },
+      { "title": "BREAK MY SOUL", "artist": "Beyoncé", "album": "Renaissance", "duration": "4:38" },
+      { "title": "Lite Spots", "artist": "KAYTRANADA", "album": "99.9%", "duration": "4:00" },
+      { "title": "Inspector Norse", "artist": "Todd Terje", "album": "It's Album Time", "duration": "6:42" },
+      { "title": "Finally", "artist": "Kings of Tomorrow", "album": "Finally", "duration": "7:03" }
     ]
-    },
-    {
+  },
+  {
     "id": 7,
-    "theme": "Cleaning Sunday",
+    "theme": "Dance",
     "imageUrl": "/music-playlist-creator/assets/img/sunday.png",
     "name": "Sunday Cleaning Vibes",
     "creator": "Sam",
     "likes": 48,
     "songs": [
-        { "title": "Leave the Door Open", "artist": "Bruno Mars, Anderson .Paak", "album": "Silk Sonic", "duration": "4:02" },
-        { "title": "Rock With You", "artist": "Michael Jackson", "album": "Off the Wall", "duration": "3:40" },
-        { "title": "Got to Give It Up", "artist": "Marvin Gaye", "album": "Live at the London Palladium", "duration": "4:15" },
-        { "title": "Just Friends (Sunny)", "artist": "Musiq Soulchild", "album": "Aijuswanaseing", "duration": "4:10" }
+      { "title": "Leave the Door Open", "artist": "Bruno Mars, Anderson .Paak", "album": "Silk Sonic", "duration": "4:02" },
+      { "title": "Rock With You", "artist": "Michael Jackson", "album": "Off the Wall", "duration": "3:40" },
+      { "title": "Got to Give It Up", "artist": "Marvin Gaye", "album": "Live at the London Palladium", "duration": "4:15" },
+      { "title": "Just Friends (Sunny)", "artist": "Musiq Soulchild", "album": "Aijuswanaseing", "duration": "4:10" },
+      { "title": "Before I Let Go", "artist": "Maze feat. Frankie Beverly", "album": "Live in New Orleans", "duration": "5:00" },
+      { "title": "Square Biz", "artist": "Teena Marie", "album": "It Must Be Magic", "duration": "6:27" },
+      { "title": "Never Too Much", "artist": "Luther Vandross", "album": "Never Too Much", "duration": "3:51" },
+      { "title": "Outstanding", "artist": "The Gap Band", "album": "Gap Band IV", "duration": "3:18" }
     ]
-    },
-    {
+  },
+  {
     "id": 8,
-    "theme": "Neo‑Soul Essentials",
+    "theme": "R&B",
     "imageUrl": "/music-playlist-creator/assets/img/soul.jpg",
     "name": "Neo‑Soul Essentials",
     "creator": "Taylor",
     "likes": 36,
     "songs": [
-        { "title": "Brown Sugar", "artist": "D'Angelo", "album": "Brown Sugar", "duration": "4:22" },
-        { "title": "Didn't Cha Know", "artist": "Erykah Badu", "album": "Mama's Gun", "duration": "3:58" },
-        { "title": "Say Yes", "artist": "Floetry", "album": "Floetic", "duration": "5:10" },
-        { "title": "Afro Blue (feat. Erykah Badu)", "artist": "Robert Glasper", "album": "Black Radio", "duration": "4:42" }
+      { "title": "Brown Sugar", "artist": "D'Angelo", "album": "Brown Sugar", "duration": "4:22" },
+      { "title": "Didn't Cha Know", "artist": "Erykah Badu", "album": "Mama's Gun", "duration": "3:58" },
+      { "title": "Say Yes", "artist": "Floetry", "album": "Floetic", "duration": "5:10" },
+      { "title": "Afro Blue (feat. Erykah Badu)", "artist": "Robert Glasper", "album": "Black Radio", "duration": "4:42" },
+      { "title": "Ascension (Don't Ever Wonder)", "artist": "Maxwell", "album": "Urban Hang Suite", "duration": "5:45" },
+      { "title": "Untitled (How Does It Feel)", "artist": "D'Angelo", "album": "Voodoo", "duration": "7:10" },
+      { "title": "Green Eyes", "artist": "Erykah Badu", "album": "Mama's Gun", "duration": "10:05" },
+      { "title": "Tyrone", "artist": "Erykah Badu", "album": "Live", "duration": "3:57" }
     ]
-    }
+  }
+  
 ]

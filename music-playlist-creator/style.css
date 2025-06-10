@@ -57,7 +57,7 @@ footer {
 
 #playlist-card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 280px);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     justify-content: center;
     gap: 20px;
     padding: 0px;
@@ -66,15 +66,30 @@ footer {
     max-width: 1400px;
 }
 
+@media (min-width: 1200px) {
+    #playlist-card-container {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: min(100vw - 40px, 1600px); 
+    }
+}
+
+@media (min-width: 1600px) {
+    #playlist-card-container {
+        max-width: min(100vw - 40px, 2000px);
+    }
+}
+
 .playlist-cards {
     background: linear-gradient(135deg, var(--background-light) 0%, #FFFFFF 100%);
-    width: 280px;
+    width: 100%; /* Remove fixed width, let grid control it */
+    min-width: 280px; /* Maintain minimum size */
     border-radius: 16px;
     border: 2px solid transparent;
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(139, 90, 131, 0.1);
+    aspect-ratio: 1; /* Keep cards square as they scale */
 }
 
 .playlist-cards:hover {
@@ -85,7 +100,7 @@ footer {
 
 .card-image {
     display: flex;
-    height: 180px;
+    height: 60%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -397,4 +412,153 @@ footer {
 .now-playing-indicator:hover {
     transform: translateX(-50%) translateY(-5px);
     box-shadow: 0 12px 35px rgba(139, 90, 131, 0.6);
+}
+
+/* Controls container */
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+/* Sort dropdown styling */
+#sort-dropdown {
+    background: linear-gradient(135deg, var(--background-light) 0%, #FFFFFF 100%);
+    border: 2px solid var(--sunset-orange);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    box-shadow: 0 4px 15px rgba(139, 90, 131, 0.1);
+}
+
+#sort-dropdown:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 90, 131, 0.2);
+    border-color: var(--sunset-purple);
+}
+
+#sort-dropdown:focus {
+    outline: none;
+    border-color: var(--sunset-purple);
+    box-shadow: 0 0 0 3px rgba(139, 90, 131, 0.2);
+}
+
+/* Shuffle button styling */
+#shuffle-button {
+    background: linear-gradient(135deg, var(--sunset-yellow) 0%, var(--sunset-orange) 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+}
+
+#shuffle-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.5);
+}
+
+#shuffle-button:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 10px rgba(255, 140, 66, 0.4);
+}
+
+#shuffle-button i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+#shuffle-button:hover i {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #sort-dropdown,
+    #shuffle-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Hide duration on mobile */
+    .song-duration {
+        display: none;
+    }
+    
+    /* Fix text overflow issues */
+    .song-info {
+        overflow: hidden;
+        min-width: 0;
+    }
+    
+    .song-details {
+        min-width: 0; /* Allow shrinking */
+        overflow: hidden;
+        flex: 1;
+        max-width: calc(100% - 120px); /* Account for thumbnail and play button */
+    }
+    
+    .song-title,
+    .song-artist,
+    .song-album {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    
+    /* Make play button span entire card on mobile */
+    .song-card {
+        position: relative;
+    }
+    
+    .play-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        border-radius: 12px;
+        margin: 0;
+        box-shadow: none;
+        z-index: 2;
+    }
+    
+    .play-button:hover {
+        background: rgba(255, 140, 66, 0.1);
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .play-button i {
+        display: none; /* Hide the play icon */
+    }
+    
+    /* Adjust song card padding on mobile */
+    .song-card {
+        padding: 10px;
+    }
+    
+    .song-info {
+        gap: 10px;
+    }
 }

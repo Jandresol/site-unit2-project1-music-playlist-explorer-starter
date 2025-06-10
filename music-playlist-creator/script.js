@@ -7,7 +7,7 @@ const nowPlayingDiv = document.getElementById('now-playing');
 const nowPlayingText = document.getElementById('now-playing-text');
 let currentPlaylist = null;
 
-const SPOTIFY_TOKEN = 'BQAaydXK_jEzLvW7PpaoOMXIX7S7xJQCdWJ6HMi9tDn8BxRdtAfrI2yzdT9E8YZYD26F28_kfCsva6YkUrN4fR0Rpnl5VeW7rAA0YSf_PnSoEhqbdJV7jrwCGQ62pGLBKvhAKEhHszM'; 
+const SPOTIFY_TOKEN = 'BQBQNfq-E33vfJ5rXT5PZnWpLmMtlRkVn6iO2AmRJn5G4kI5-T2G8MPNPvLiameE_nsCK44AjTE0zNURjtv_77DbJ643Q0_b2eryur0QMUsl9Ycv9C_l55PiQrRuVVTLihqdLnRznGE'; 
 
 function openModal(playlist) {
     currentPlaylist = playlist;
@@ -35,7 +35,7 @@ function openModal(playlist) {
                     <p class="song-album">${song.album}</p>
                 </div>
             </div>
-            <button class="play-button" onclick="togglePlay('${song.title}', '${song.artist}', this)">
+            <button class="play-button" onclick="event.stopPropagation(); togglePlay('${song.title}', '${song.artist}', this)">
                 <i class="fa-solid fa-play"></i>
             </button>
             <div class="song-duration">${song.duration || '0:00'}</div>
@@ -43,10 +43,12 @@ function openModal(playlist) {
 
         songCard.dataset.uri = spotifyData?.uri || '';
         songsContainer.appendChild(songCard);
+        
     });
 
     modal.style.display = "block";
 }
+
 
 span.onclick = () => modal.style.display = "none";
 
