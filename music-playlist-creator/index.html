@@ -16,127 +16,7 @@
     </header>
 
     <main> 
-        <div 
-            onclick="openModal({
-                imageUrl: 'images/chill-vibes.jpg', 
-                name: 'Chill Vibes',
-                creator: 'Created by Alex',
-                songs: [
-                    { title: 'Lush Life', artist: 'Zara Larsson', album: 'So Good' },
-                    { title: 'Sunflower', artist: 'Post Malone, Swae Lee', album: 'Spider-Man: Into the Spider-Verse' },
-                    { title: 'Location', artist: 'Khalid', album: 'American Teen' }
-                ]
-            })"
-            style="cursor: pointer; background-color: #f0f0f0; padding: 1rem; border-radius: 8px;">
-            🎧 View Chill Vibes Playlist
-        </div>
-
-        <section id="playlist-card-container">
-            <div class = "playlist-cards" id = "card-1">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-2">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-3">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-4">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-5">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-6">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-7">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-            <div class = "playlist-cards" id = "card-8">
-                <div class = "playlist-image">
-                    <img></img>
-                </div>
-                <div class = "playlist-text">
-                    <h3 class = "playlist-title">Playlist Title</h3> 
-                    <h5 class = "creator-name">Creator Name</h5>
-                </div>
-                <div class = "like-container">
-                <i class="fa-regular fa-heart"></i>
-                    <p class = "like-count">5</p>
-                </div>
-            </div>
-
+        <section id="playlist-card-container"></section>
     </main>
 
     <div id="playlistModal" class="modal">
@@ -144,11 +24,23 @@
             <span class="close">&times;</span>
             <div class="modal-info">
                 <div class="modal-header">
-                    <img id="playlist-image" src="/assets/img/playlist.png" alt="Playlist Image"/>
-                        <div id="modal-header-text">
-                            <h3 id="playlist-name"></h3>
-                            <h5 id="creator-name"></h5>
-                        </div>
+                    <img id="playlist-image" src="" alt="Playlist Image"/>
+                    <div id="modal-header-text">
+                        <h3 id="playlist-name"></h3>
+                        <h5 id="creator-name"></h5>
+                    </div>
+                </div>
+                <div class="controls">
+                    <select id="sort-dropdown">
+                        <option value="default">Sort by...</option>
+                        <option value="name">Name (A-Z)</option>
+                        <option value="creator">Creator</option>
+                        <option value="likes">Most Liked</option>
+                    </select>
+                    <button id="shuffle-button">
+                        <i class="fa-solid fa-shuffle"></i>
+                        Shuffle
+                    </button>
                 </div>
             </div>
             <div id="songs"></div>
@@ -158,7 +50,6 @@
     <footer>
         <!-- Your footer content here -->
     </footer>
-    <script src="data/data.js"></script>
     <script src="script.js"></script>
 
 </body>
