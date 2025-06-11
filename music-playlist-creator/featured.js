@@ -1,3 +1,5 @@
+import { SPOTIFY_TOKEN } from './config.js';
+
 const modal = document.getElementById("playlistModal");
 const span = document.getElementsByClassName("close")[0];
 const container = document.getElementById("playlist-card-container");
@@ -7,8 +9,6 @@ let currentlyPlaying = null;
 let currentButton = null;
 let currentPlaylist = null;
 let lastFeaturedIndex = -1;
-
-const SPOTIFY_TOKEN = 'BQDXJ2cxgudsaX16QV2fhFYfro9J1EXg-69llAPenk8NMJk98x493uhdW20ouLABqKHsxNRfOQQ2Qs0cNmQwqcmfDPvkdIHtl9Pg0xR4ewr0701btusV66-d3f4Hx28_OM6aNmjGgWI'; // Replace with your token
 
 async function searchSongAndGetImage(title, artist) {
     const query = encodeURIComponent(`${title} ${artist}`);

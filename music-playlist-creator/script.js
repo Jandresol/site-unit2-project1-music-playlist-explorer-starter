@@ -1,4 +1,4 @@
-// import { SPOTIFY_TOKEN } from './config.js';
+import { SPOTIFY_TOKEN } from './config.js';
 
 const modal = document.getElementById("playlistModal");
 const span = document.getElementsByClassName("close")[0];
@@ -8,8 +8,7 @@ const nowPlayingText = document.getElementById('now-playing-text');
 let currentPlaylist = null;
 let playlists = [];
 let filteredPlaylists = [];
-
-const SPOTIFY_TOKEN = 'BQDXJ2cxgudsaX16QV2fhFYfro9J1EXg-69llAPenk8NMJk98x493uhdW20ouLABqKHsxNRfOQQ2Qs0cNmQwqcmfDPvkdIHtl9Pg0xR4ewr0701btusV66-d3f4Hx28_OM6aNmjGgWI'; 
+let nextPlaylistId = 1;
 
 function openModal(playlist) {
     currentPlaylist = playlist;
@@ -34,13 +33,13 @@ function openModal(playlist) {
                 <div class="song-details">
                     <p class="song-title">${song.title}</p>
                     <p class="song-artist">${song.artist}</p>
-                    <p class="song-album">${song.album}</p>
+                    <p class="song-album">${spotifyData?.album || song.album}</p>
                 </div>
             </div>
             <button class="play-button" onclick="event.stopPropagation(); togglePlay('${song.title}', '${song.artist}', this)">
                 <i class="fa-solid fa-play"></i>
             </button>
-            <div class="song-duration">${song.duration || '0:00'}</div>
+            <div class="song-duration">${spotifyData?.duration || song.duration || '0:00'}</div>
         `;
 
         songCard.dataset.uri = spotifyData?.uri || '';
@@ -138,7 +137,7 @@ function renderPlaylists() {
                     container.removeChild(card);
 
                     // Optional: remove from playlist array if needed
-                    // playlists = playlists.filter(p => p !== playlist);
+                    playlists = playlists.filter(p => p !== playlist);
 
                     // Save changes to localStorage or backend if needed
                 }
@@ -211,7 +210,9 @@ async function searchSongAndGetImage(title, artist) {
         const track = data.tracks.items[0];
         return {
             imageUrl: track.album.images[0]?.url,
-            uri: track.uri
+            uri: track.uri,
+            duration: msToMinSec(track.duration_ms),
+            album: track.album.name
         };
     }
     return null;
@@ -266,11 +267,140 @@ document.getElementById('sort-dropdown').addEventListener('change', (e) => {
 
 // Add playlist button
 document.getElementById('add-playlist-btn').addEventListener('click', () => {
-    alert('Add Playlist functionality would be implemented here!');
+    document.getElementById('add-playlist-btn').addEventListener('click', openAddPlaylistModal);
 });
 
-// Shuffle button in modal
-document.getElementById('shuffle-button').addEventListener('click', () => {
-    alert('Shuffle functionality would be implemented here!');
+//Add Playlists Modal Functionality
+function openAddPlaylistModal() {
+    document.getElementById('addPlaylistModal').style.display = 'block';
+    // Add first song input by default
+    addSongInput();
+}
+
+function closeAddPlaylistModal() {
+    document.getElementById('addPlaylistModal').style.display = 'none';
+    resetAddPlaylistForm();
+}
+
+function resetAddPlaylistForm() {
+    document.getElementById('add-playlist-form').reset();
+    document.getElementById('songs-container').innerHTML = '';
+    document.getElementById('image-preview').style.display = 'none';
+}
+
+function addSongInput() {
+    const songsContainer = document.getElementById('songs-container');
+    const songInputGroup = document.createElement('div');
+    songInputGroup.className = 'song-input-group';
+
+    songInputGroup.innerHTML = `
+        <button type="button" class="remove-song-btn" onclick="removeSongInput(this)">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="song-input-row">
+            <input type="text" placeholder="Song Title *" class="song-title-input" required>
+            <input type="text" placeholder="Artist *" class="song-artist-input" required>
+        </div>
+    `;
+
+    songsContainer.appendChild(songInputGroup);
+    }
+
+    function removeSongInput(button) {
+        const songGroup = button.closest('.song-input-group');
+        songGroup.remove();
+    }
+
+    // Image preview functionality
+    document.getElementById('playlist-image-input').addEventListener('input', function(e) {
+    const imageUrl = e.target.value;
+    const preview = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+
+if (imageUrl) {
+    previewImg.src = imageUrl;
+    preview.style.display = 'block';
+    
+    // Handle image load error
+    previewImg.onerror = function() {
+        preview.style.display = 'none';
+    };
+} else {
+    preview.style.display = 'none';
+}
 });
 
+// Form submission
+document.getElementById('add-playlist-form').addEventListener('submit', function(e) {
+e.preventDefault();
+
+    const playlistName = document.getElementById('playlist-name-input').value.trim();
+    const playlistAuthor = document.getElementById('playlist-author-input').value.trim();
+    const playlistImage = document.getElementById('playlist-image-input').value.trim();
+
+    // Collect songs
+    const songInputs = document.querySelectorAll('.song-input-group');
+    const songs = [];
+
+    songInputs.forEach(songGroup => {
+        const title = songGroup.querySelector('.song-title-input').value.trim();
+        const artist = songGroup.querySelector('.song-artist-input').value.trim();
+        
+        if (title && artist) {
+            songs.push({
+                title: title,
+                artist: artist,
+                album: 'Album',
+                duration: '3:30',
+            });
+        }
+    });
+
+    // Validation
+    if (!playlistName || !playlistAuthor) {
+        alert('Please fill in all required fields (Name and Author).');
+        return;
+    }
+
+    if (songs.length === 0) {
+        alert('Please add at least one song to the playlist.');
+        return;
+    }
+
+    // Create new playlist
+    const newPlaylist = {
+        id: nextPlaylistId++,
+        name: playlistName,
+        creator: playlistAuthor,
+        likes: 0,
+        imageUrl: playlistImage || `https://picsum.photos/900/900?random=${nextPlaylistId}`,
+        songs: songs
+    };
+
+    // Add to playlists array
+    playlists.unshift(newPlaylist); // Add to beginning
+    filteredPlaylists = [...playlists];
+
+    // Re-render playlists
+    renderPlaylists();
+
+    // Close modal and reset form
+    closeAddPlaylistModal();
+
+    // Show success message
+    alert(`Playlist "${playlistName}" created successfully with ${songs.length} song(s)!`);
+});
+
+function msToMinSec(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+
+document.getElementById('close-add-playlist').addEventListener('click', closeAddPlaylistModal)
+document.getElementById('cancel-playlist').addEventListener('click', closeAddPlaylistModal);
+document.getElementById('add-song-btn').addEventListener('click', addSongInput);
+document.querySelector('.create-btn').addEventListener('click', (e) => {
+    document.getElementById('add-playlist-form').requestSubmit();
+});

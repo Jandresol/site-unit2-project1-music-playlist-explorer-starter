@@ -32,9 +32,16 @@
             </div>
         </header>
         <main> 
-            <div class="homepage-text">
-                <h1>Discover Amazing Playlists</h1>
-                <h3>Explore Our Collection of Curated Playlists</h5>
+            <div class="homepage-header">
+                <div class="homepage-text">
+                    <h1>Explore Playlists</h1>
+                    <h3>Encover Our Collection of Curated Music</h5>
+                </div>
+                <button class="add-playlist-btn" id="add-playlist-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="btn-text">Add Playlist</span>
+                </button>
+
             </div>
             <div class="search-controls">
                 <div class="search-bar">
@@ -86,10 +93,60 @@
         <div id="now-playing" class="now-playing-indicator">
             <span id="now-playing-text">Now Playing: </span>
         </div>
+        <div id="addPlaylistModal" class="modal">
+            <div class="modal-content add-playlist-modal">
+                <span class="close" id="close-add-playlist">&times;</span>
+                <h2 style="margin-bottom: 2rem; color: #333; text-align: center;">Create New Playlist</h2>
+                
+                <form id="add-playlist-form">
+                    <div class="form-section">
+                        <h3>Playlist Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="playlist-name-input">Playlist Name *</label>
+                            <input type="text" id="playlist-name-input" required placeholder="Enter playlist name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playlist-author-input">Author *</label>
+                            <input type="text" id="playlist-author-input" required placeholder="Enter author name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playlist-image-input">Cover Image URL</label>
+                            <input type="url" id="playlist-image-input" placeholder="Enter image URL (optional)">
+                            <div class="image-preview" id="image-preview" style="display: none;">
+                                <img id="preview-img" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px; margin-top: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="songs-header">
+                            <h3>Songs</h3>
+                            <button type="button" id="add-song-btn" class="add-song-button">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Song
+                            </button>
+                        </div>
+                        
+                        <div id="songs-container">
+                            <!-- Songs will be added here dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancel-playlist" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="create-btn">Create Playlist</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         <footer>
         </footer>
-        <script src="script.js"></script>
+        <script type="module" src="script.js"></script>
 
     </body>
     </html>
