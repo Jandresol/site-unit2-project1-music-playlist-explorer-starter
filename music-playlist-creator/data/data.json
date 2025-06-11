@@ -81,7 +81,7 @@
     "imageUrl": "./assets/img/boom-bap.jpg",
     "name": "Boom‑Bap Classics",
     "creator": "Jordan",
-    "likes": 37,
+    "likes": 0,
     "songs": [
       { "title": "N.Y. State of Mind", "artist": "Nas", "album": "Illmatic", "duration": "4:54" },
       { "title": "The World Is Yours", "artist": "Nas", "album": "Illmatic", "duration": "4:50" },

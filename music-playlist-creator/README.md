@@ -140,15 +140,15 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](htt
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional.
+Lesson 1 and 2 were great for introducing us to JavaScript and the DOM model. Prior to this, I wasn't the most comfortable with JavaScript. Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+I would have spent more time planning out my javascript, specifically focusing on reusability of functions and best practices for the design and implementation of my code. I found that for instance the edit and add modal functionality was redundant, so maybe finding a way to better structure those functions.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I had a lot of trouble with understanding the HTTP get requests and handing the timing of actions, such as whether or not to use async or await. I also had issues with some functionality that were not loading, so I had to fix it by experimenting with the scope of some functions. For the stretch features, I relied a lot on external sources, I think in the future taking the time to see if I can rely less on documentation and video tutorials for some of the code.
 
 ### Open-source libraries used
 
