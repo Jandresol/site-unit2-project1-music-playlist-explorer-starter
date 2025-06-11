@@ -10,6 +10,22 @@ let playlists = [];
 let filteredPlaylists = [];
 let nextPlaylistId = 1;
 
+// Fetch data and render playlists
+fetch("data/data.json")
+    .then(res => res.json())
+    .then(data => {
+        playlists = data;
+        filteredPlaylists = [...playlists];
+        renderPlaylists();
+    });
+
+// Modal close logic
+span.onclick = () => modal.style.display = "none";
+window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+};
+
+// Modal open logic
 function openModal(playlist) {
     currentPlaylist = playlist;
     document.getElementById('playlist-image').style.backgroundImage = `url('${playlist.imageUrl}')`;
@@ -22,7 +38,6 @@ function openModal(playlist) {
     playlist.songs.forEach(async song => {
         const songCard = document.createElement('div');
         songCard.className = 'song-card';
-
         const spotifyData = await searchSongAndGetImage(song.title, song.artist);
 
         songCard.innerHTML = `
@@ -44,185 +59,173 @@ function openModal(playlist) {
 
         songCard.dataset.uri = spotifyData?.uri || '';
         songsContainer.appendChild(songCard);
-        
     });
 
     modal.style.display = "block";
 }
 
-
-span.onclick = () => modal.style.display = "none";
-
-window.onclick = (e) => {
-    if (e.target === modal) modal.style.display = "none";
-};
-
-fetch("data/data.json")
-    .then(res => res.json())
-    .then(data => {
-        playlists = data;
-        filteredPlaylists = [...playlists];
-        renderPlaylists();
-    });
-
+// Render all playlist cards
 function renderPlaylists() {
     container.innerHTML = '';
-            filteredPlaylists.forEach(playlist => {
-            const card = document.createElement("div");
-            card.classList.add("playlist-cards");
-            card.innerHTML = `
-                <div class="card-image" style="background-image: url('${playlist.imageUrl}');"></div>
-                <div class="playlist-text">
-                    <h3 class="playlist-title">${playlist.name}</h3>
-                    <h5 class="creator-name">Created by ${playlist.creator}</h5>
+    filteredPlaylists.forEach(playlist => {
+        const card = document.createElement("div");
+        card.classList.add("playlist-cards");
+        card.innerHTML = `
+            <div class="card-image" style="background-image: url('${playlist.imageUrl}');"></div>
+            <div class="playlist-text">
+                <h3 class="playlist-title">${playlist.name}</h3>
+                <h5 class="creator-name">Created by ${playlist.creator}</h5>
+            </div>
+            <div class="playlist-bottom">
+                <div class="like-container">
+                    <i class="fa-regular fa-heart"></i>
+                    <p class="like-count">${playlist.likes}</p>
                 </div>
-                <div class="playlist-bottom">
-                    <div class="like-container">
-                        <i class="fa-regular fa-heart"></i>
-                        <p class="like-count">${playlist.likes}</p>
-                    </div>
-                    <div class="playlist-controls">
-                        <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
-                    </div>
+                <div class="playlist-controls">
+                    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
                 </div>
+            </div>
+        `;
 
-            `;
+        card.style.cursor = "pointer";
+        card.addEventListener("click", () => openModal(playlist));
 
-            card.style.cursor = "pointer";
-            card.addEventListener("click", () => openModal(playlist));
+        const likeContainer = card.querySelector(".like-container");
+        const heartIcon = likeContainer.querySelector("i");
+        const likeCount = likeContainer.querySelector(".like-count");
+        let liked = false;
 
-            const likeContainer = card.querySelector(".like-container");
-            const heartIcon = likeContainer.querySelector("i");
-            const likeCount = likeContainer.querySelector(".like-count");
-            let liked = false;
-
-            likeContainer.addEventListener("click", (event) => {
-                event.stopPropagation();
-                liked = !liked;
-
-                heartIcon.classList.toggle("fa-regular", !liked);
-                heartIcon.classList.toggle("fa-solid", liked);
-                playlist.likes += liked ? 1 : -1;
-                likeCount.textContent = playlist.likes;
-            });
-
-            container.appendChild(card);
-
-            const editButton = card.querySelector(".edit-button");
-            const deleteButton = card.querySelector(".delete-button");
-
-            // Edit logic
-            editButton.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const newName = prompt("Enter new playlist name:", playlist.name);
-                if (newName && newName.trim() !== "") {
-                    playlist.name = newName;
-                    card.querySelector(".playlist-title").textContent = newName;
-
-                    // Optional: update modal if it's open
-                    if (currentPlaylist === playlist) {
-                        document.getElementById('playlist-name').innerText = newName;
-                    }
-
-                    // Save to localStorage or backend if needed
-                }
-            });
-
-            // Delete logic
-            deleteButton.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const confirmDelete = confirm("Are you sure you want to delete this playlist?");
-                if (confirmDelete) {
-                    container.removeChild(card);
-
-                    // Optional: remove from playlist array if needed
-                    playlists = playlists.filter(p => p !== playlist);
-
-                    // Save changes to localStorage or backend if needed
-                }
-            });
-
+        likeContainer.addEventListener("click", (event) => {
+            event.stopPropagation();
+            liked = !liked;
+            heartIcon.classList.toggle("fa-regular", !liked);
+            heartIcon.classList.toggle("fa-solid", liked);
+            playlist.likes += liked ? 1 : -1;
+            likeCount.textContent = playlist.likes;
         });
 
+        const editButton = card.querySelector(".edit-button");
+        const deleteButton = card.querySelector(".delete-button");
+
+        editButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const newName = prompt("Enter new playlist name:", playlist.name);
+            if (newName && newName.trim() !== "") {
+                playlist.name = newName;
+                card.querySelector(".playlist-title").textContent = newName;
+                if (currentPlaylist === playlist) {
+                    document.getElementById('playlist-name').innerText = newName;
+                }
+            }
+        });
+
+        deleteButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (confirm("Are you sure you want to delete this playlist?")) {
+                playlists = playlists.filter(p => p !== playlist);
+                filteredPlaylists = [...playlists];
+                renderPlaylists();
+            }
+        });
+
+        container.appendChild(card);
+    });
 }
 
-function shuffleSongs(playlist) {
-    const songsContainer = document.getElementById('songs');
-    for (let i = playlist.songs.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [playlist.songs[i], playlist.songs[j]] = [playlist.songs[j], playlist.songs[i]];
-    }
-
-    openModal(playlist);
-}
-
-document.getElementById("shuffle-button").addEventListener("click", () => {
-    if (currentPlaylist) shuffleSongs(currentPlaylist);
+// Search
+document.getElementById('search-input').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    filteredPlaylists = playlists.filter(playlist =>
+        playlist.name.toLowerCase().includes(searchTerm) ||
+        playlist.creator.toLowerCase().includes(searchTerm) ||
+        playlist.songs.some(song =>
+            song.title.toLowerCase().includes(searchTerm) ||
+            song.artist.toLowerCase().includes(searchTerm)
+        )
+    );
+    renderPlaylists();
 });
 
+// Sort
+document.getElementById('sort-dropdown').addEventListener('change', (e) => {
+    const sortBy = e.target.value;
+    const sortMethods = {
+        name: (a, b) => a.name.localeCompare(b.name),
+        creator: (a, b) => a.creator.localeCompare(b.creator),
+        likes: (a, b) => b.likes - a.likes,
+        recent: (a, b) => b.id - a.id,
+    };
+    filteredPlaylists.sort(sortMethods[sortBy]);
+    renderPlaylists();
+});
+
+// Shuffle
+document.getElementById("shuffle-button").addEventListener("click", () => {
+    if (currentPlaylist) {
+        for (let i = currentPlaylist.songs.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [currentPlaylist.songs[i], currentPlaylist.songs[j]] = [currentPlaylist.songs[j], currentPlaylist.songs[i]];
+        }
+        openModal(currentPlaylist);
+    }
+});
+
+// Toggle Play
 let currentlyPlaying = null;
 let currentButton = null;
 
 async function togglePlay(title, artist, button) {
     const songKey = `${title} - ${artist}`;
     const trackData = await searchSongAndGetImage(title, artist);
-
-    if (!trackData || !trackData.uri) {
+    if (!trackData?.uri) {
         alert("Spotify track not found.");
         return;
     }
 
-if (currentlyPlaying === songKey) {
-    button.innerHTML = '<i class="fa-solid fa-play"></i>';
-    button.parentElement.classList.remove('now-playing');
-    nowPlayingDiv.style.display = 'none';
-    currentlyPlaying = null;
-    currentButton = null;
-    pauseSpotify();
-} else {
-    // Reset previous button and card
-    if (currentButton) {
-        currentButton.innerHTML = '<i class="fa-solid fa-play"></i>';
-        currentButton.parentElement.classList.remove('now-playing'); // <-- this line fixes your issue
-    }
-
-    // Update current card
-    button.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    button.parentElement.classList.add('now-playing');
-    nowPlayingText.textContent = `Now Playing: ${songKey}`;
-    nowPlayingDiv.style.display = 'block';
-    currentlyPlaying = songKey;
-    currentButton = button;
-
-    await playSpotifyTrack(trackData.uri);
+    if (currentlyPlaying === songKey) {
+        button.innerHTML = '<i class="fa-solid fa-play"></i>';
+        button.parentElement.classList.remove('now-playing');
+        nowPlayingDiv.style.display = 'none';
+        currentlyPlaying = null;
+        currentButton = null;
+        pauseSpotify();
+    } else {
+        if (currentButton) {
+            currentButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+            currentButton.parentElement.classList.remove('now-playing');
+        }
+        button.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        button.parentElement.classList.add('now-playing');
+        nowPlayingText.textContent = `Now Playing: ${songKey}`;
+        nowPlayingDiv.style.display = 'block';
+        currentlyPlaying = songKey;
+        currentButton = button;
+        await playSpotifyTrack(trackData.uri);
     }
 }
 
+// Spotify helpers
 async function searchSongAndGetImage(title, artist) {
     const query = encodeURIComponent(`${title} ${artist}`);
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
+    const res = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
         headers: { Authorization: `Bearer ${SPOTIFY_TOKEN}` }
     });
-
-    const data = await response.json();
-    if (data.tracks.items.length > 0) {
-        const track = data.tracks.items[0];
-        return {
-            imageUrl: track.album.images[0]?.url,
-            uri: track.uri,
-            duration: msToMinSec(track.duration_ms),
-            album: track.album.name
-        };
-    }
-    return null;
+    const data = await res.json();
+    const track = data.tracks.items[0];
+    return track ? {
+        imageUrl: track.album.images[0]?.url,
+        uri: track.uri,
+        duration: msToMinSec(track.duration_ms),
+        album: track.album.name
+    } : null;
 }
 
 async function playSpotifyTrack(uri) {
     await fetch(`https://api.spotify.com/v1/me/player/play`, {
         method: "PUT",
         headers: {
-            "Authorization": `Bearer ${SPOTIFY_TOKEN}`,
+            Authorization: `Bearer ${SPOTIFY_TOKEN}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ uris: [uri] })
@@ -232,48 +235,27 @@ async function playSpotifyTrack(uri) {
 async function pauseSpotify() {
     await fetch(`https://api.spotify.com/v1/me/player/pause`, {
         method: "PUT",
-        headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
+        headers: { Authorization: `Bearer ${SPOTIFY_TOKEN}` }
     });
 }
 
-// Search functionality
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    filteredPlaylists = playlists.filter(playlist => 
-        playlist.name.toLowerCase().includes(searchTerm) ||
-        playlist.creator.toLowerCase().includes(searchTerm) ||
-        playlist.songs.some(song => 
-            song.title.toLowerCase().includes(searchTerm) ||
-            song.artist.toLowerCase().includes(searchTerm)
-        )
-    );
-    renderPlaylists();
+function msToMinSec(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Playlist form modal
+document.getElementById('add-playlist-btn').addEventListener('click', openAddPlaylistModal);
+document.getElementById('close-add-playlist').addEventListener('click', closeAddPlaylistModal);
+document.getElementById('cancel-playlist').addEventListener('click', closeAddPlaylistModal);
+document.getElementById('add-song-btn').addEventListener('click', addSongInput);
+document.querySelector('.create-btn').addEventListener('click', () => {
+    document.getElementById('add-playlist-form').requestSubmit();
 });
 
-// Sort functionality
-document.getElementById('sort-dropdown').addEventListener('change', (e) => {
-    const sortBy = e.target.value;
-    if (sortBy === 'name') {
-        filteredPlaylists.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'creator') {
-        filteredPlaylists.sort((a, b) => a.creator.localeCompare(b.creator));
-    } else if (sortBy === 'likes') {
-        filteredPlaylists.sort((a, b) => b.likes - a.likes);
-    } else if (sortBy === 'recent') {
-        filteredPlaylists.sort((a, b) => b.id - a.id);
-    }
-    renderPlaylists();
-});
-
-// Add playlist button
-document.getElementById('add-playlist-btn').addEventListener('click', () => {
-    document.getElementById('add-playlist-btn').addEventListener('click', openAddPlaylistModal);
-});
-
-//Add Playlists Modal Functionality
 function openAddPlaylistModal() {
     document.getElementById('addPlaylistModal').style.display = 'block';
-    // Add first song input by default
     addSongInput();
 }
 
@@ -292,7 +274,6 @@ function addSongInput() {
     const songsContainer = document.getElementById('songs-container');
     const songInputGroup = document.createElement('div');
     songInputGroup.className = 'song-input-group';
-
     songInputGroup.innerHTML = `
         <button type="button" class="remove-song-btn" onclick="removeSongInput(this)">
             <i class="fa-solid fa-times"></i>
@@ -302,61 +283,40 @@ function addSongInput() {
             <input type="text" placeholder="Artist *" class="song-artist-input" required>
         </div>
     `;
-
     songsContainer.appendChild(songInputGroup);
-    }
+}
 
-    function removeSongInput(button) {
-        const songGroup = button.closest('.song-input-group');
-        songGroup.remove();
-    }
+function removeSongInput(button) {
+    button.closest('.song-input-group').remove();
+}
 
-    // Image preview functionality
-    document.getElementById('playlist-image-input').addEventListener('input', function(e) {
+// Image preview
+document.getElementById('playlist-image-input').addEventListener('input', function (e) {
     const imageUrl = e.target.value;
     const preview = document.getElementById('image-preview');
     const previewImg = document.getElementById('preview-img');
-
-if (imageUrl) {
-    previewImg.src = imageUrl;
-    preview.style.display = 'block';
-    
-    // Handle image load error
-    previewImg.onerror = function() {
+    if (imageUrl) {
+        previewImg.src = imageUrl;
+        preview.style.display = 'block';
+        previewImg.onerror = () => preview.style.display = 'none';
+    } else {
         preview.style.display = 'none';
-    };
-} else {
-    preview.style.display = 'none';
-}
+    }
 });
 
-// Form submission
-document.getElementById('add-playlist-form').addEventListener('submit', function(e) {
-e.preventDefault();
-
+// Submit new playlist
+document.getElementById('add-playlist-form').addEventListener('submit', function (e) {
+    e.preventDefault();
     const playlistName = document.getElementById('playlist-name-input').value.trim();
     const playlistAuthor = document.getElementById('playlist-author-input').value.trim();
     const playlistImage = document.getElementById('playlist-image-input').value.trim();
 
-    // Collect songs
-    const songInputs = document.querySelectorAll('.song-input-group');
-    const songs = [];
-
-    songInputs.forEach(songGroup => {
+    const songs = Array.from(document.querySelectorAll('.song-input-group')).map(songGroup => {
         const title = songGroup.querySelector('.song-title-input').value.trim();
         const artist = songGroup.querySelector('.song-artist-input').value.trim();
-        
-        if (title && artist) {
-            songs.push({
-                title: title,
-                artist: artist,
-                album: 'Album',
-                duration: '3:30',
-            });
-        }
-    });
+        return title && artist ? { title, artist, album: 'Album', duration: '3:30' } : null;
+    }).filter(Boolean);
 
-    // Validation
     if (!playlistName || !playlistAuthor) {
         alert('Please fill in all required fields (Name and Author).');
         return;
@@ -367,40 +327,18 @@ e.preventDefault();
         return;
     }
 
-    // Create new playlist
     const newPlaylist = {
         id: nextPlaylistId++,
         name: playlistName,
         creator: playlistAuthor,
         likes: 0,
         imageUrl: playlistImage || `https://picsum.photos/900/900?random=${nextPlaylistId}`,
-        songs: songs
+        songs
     };
 
-    // Add to playlists array
-    playlists.unshift(newPlaylist); // Add to beginning
+    playlists.unshift(newPlaylist);
     filteredPlaylists = [...playlists];
-
-    // Re-render playlists
     renderPlaylists();
-
-    // Close modal and reset form
     closeAddPlaylistModal();
-
-    // Show success message
     alert(`Playlist "${playlistName}" created successfully with ${songs.length} song(s)!`);
-});
-
-function msToMinSec(ms) {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = Math.floor((ms % 60000) / 1000);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
-
-
-document.getElementById('close-add-playlist').addEventListener('click', closeAddPlaylistModal)
-document.getElementById('cancel-playlist').addEventListener('click', closeAddPlaylistModal);
-document.getElementById('add-song-btn').addEventListener('click', addSongInput);
-document.querySelector('.create-btn').addEventListener('click', (e) => {
-    document.getElementById('add-playlist-form').requestSubmit();
 });
