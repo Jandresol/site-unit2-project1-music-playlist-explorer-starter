@@ -15,6 +15,11 @@ fetch("data/data.json")
     .then(res => res.json())
     .then(data => {
         playlists = data;
+
+        const maxId = playlists.reduce((max, p) => Math.max(max, p.id), 0);
+        nextPlaylistId = maxId + 1;
+
+
         filteredPlaylists = [...playlists];
         renderPlaylists();
     });
@@ -360,6 +365,8 @@ function openEditPlaylistModal(playlistId) {
         alert('Playlist not found.');
         return;
     }
+    console.log("✅ Loaded playlists:", playlistId, "| nextPlaylistId:", currentEditingPlaylistId);
+
 
     currentEditingPlaylistId = playlistId;
     document.getElementById('editPlaylistModal').style.display = 'block';
@@ -422,6 +429,7 @@ function editSongInput(title = '', artist = '') {
 
 document.getElementById('edit-playlist-form').addEventListener('submit', function(e) {
     e.preventDefault();
+
 
     if (currentEditingPlaylistId === null) {
         alert('No playlist selected for editing.');

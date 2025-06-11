@@ -498,6 +498,7 @@ footer {
     color: var(--text-dark);
     font-weight: 500;
     transition: color 0.3s ease;
+    margin: 0px;
 }
 
 .song-card:hover .song-title {
