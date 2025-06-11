@@ -48,8 +48,9 @@ function openModal(playlist) {
         songCard.innerHTML = `
             <div class="song-info">
                 <div class="song-thumbnail">
-                    <img src="${spotifyData?.imageUrl || ''}" alt="Album Cover" style="width:60px;height:60px;object-fit:cover;">
-                </div>
+                    <img src="${spotifyData?.imageUrl || 'assets/img/playlist.png'}" 
+                        onerror="this.onerror=null;this.src='assets/img/playlist.png';"
+                        style="width:60px;height:60px;object-fit:cover;"></div>
                 <div class="song-details">
                     <p class="song-title">${song.title}</p>
                     <p class="song-artist">${song.artist}</p>
@@ -198,11 +199,11 @@ let currentButton = null;
 async function togglePlay(title, artist, button) {
     const songKey = `${title} - ${artist}`;
     const trackData = await searchSongAndGetImage(title, artist);
-    if (!trackData?.uri) {
-        alert("Spotify track not found.");
+
+    if (!trackData.uri) {
         return;
     }
-
+    
     if (currentlyPlaying === songKey) {
         button.innerHTML = '<i class="fa-solid fa-play"></i>';
         button.parentElement.classList.remove('now-playing');
@@ -228,17 +229,34 @@ async function togglePlay(title, artist, button) {
 // Spotify helpers
 async function searchSongAndGetImage(title, artist) {
     const query = encodeURIComponent(`${title} ${artist}`);
-    const res = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
-        headers: { Authorization: `Bearer ${SPOTIFY_TOKEN}` }
-    });
-    const data = await res.json();
-    const track = data.tracks.items[0];
-    return track ? {
-        imageUrl: track.album.images[0]?.url,
-        uri: track.uri,
-        duration: msToMinSec(track.duration_ms),
-        album: track.album.name
-    } : null;
+    try {
+        const res = await fetch(
+        `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
+            headers: { Authorization: `Bearer ${SPOTIFY_TOKEN}` }
+        }
+        );
+
+        if (!res.ok) throw new Error(`Spotify fetch failed: ${res.status}`);
+        const data = await res.json();
+        const track = data.tracks.items[0];
+
+        if (!track) throw new Error("No track found");
+
+        return {
+            imageUrl: track.album.images[0]?.url,
+            uri:     track.uri,
+            duration: msToMinSec(track.duration_ms),
+            album:    track.album.name
+        };
+    } catch (err) {
+        console.warn("Spotify lookup failed for", title, artist, err);
+        return {
+            imageUrl: 'assets/playlist.png',
+            uri:      null,
+            duration: null,
+            album:    ''
+        };
+    }
 }
 
 async function playSpotifyTrack(uri) {

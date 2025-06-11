@@ -50,17 +50,17 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](htt
     - [x] If previously liked:
       - [x] The like count on the playlist tile should decrease by 1.
       - [x] There should be visual feedback (such as the heart turning a different color) to show that the playlist has been unliked by the user.
-    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please film yourself liking and unliking:
-      - [ ] a playlist with a like count of 0
-      - [ ] a playlist with a non-zero like count
+    - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please film yourself liking and unliking:
+      - [x] a playlist with a like count of 0
+      - [x] a playlist with a non-zero like count
 
 - [x] **Shuffle Songs**
   - [x] Enable users to shuffle the songs within a playlist using a shuffle button in the playlist's detail modal.
   - [x] When the shuffle button is clicked, the playlist's songs should display in a different order.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself shuffling the same playlist more than once. 
+  - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself shuffling the same playlist more than once. 
   
 - [x] **Featured Page**
-  - [ ] Application includes a dedicated page that randomly selects and displays a playlist, showing the playlist’s:
+  - [x] Application includes a dedicated page that randomly selects and displays a playlist, showing the playlist’s:
     - [x] Playlist Image
     - [x] Playlist Name
     - [x] List of songs, including each song's:
@@ -141,7 +141,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](htt
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
 Lesson 1 and 2 were great for introducing us to JavaScript and the DOM model. Prior to this, I wasn't the most comfortable with JavaScript. Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional.
-
+The in class demo
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
 I would have spent more time planning out my javascript, specifically focusing on reusability of functions and best practices for the design and implementation of my code. I found that for instance the edit and add modal functionality was redundant, so maybe finding a way to better structure those functions.
