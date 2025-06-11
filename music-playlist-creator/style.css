@@ -67,6 +67,8 @@ input, label{
 }
 header {
     padding: 40px 100px;
+    text-align: center;
+
 }
 
 .header-content {
@@ -1409,6 +1411,9 @@ footer {
 @media (max-width: 480px) {
     body, main{
         overflow-x:none;
+    }
+    .homepage-text h1{
+        font-size: 40px;
     }
     
 }
