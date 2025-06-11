@@ -468,3 +468,5 @@ document.getElementById('edit-playlist-form').addEventListener('submit', functio
     // Show success message
     alert(`Playlist "${playlistName}" updated successfully with ${songs.length} song(s)!`);
 });
+
+window.togglePlay = togglePlay;
