@@ -109,14 +109,14 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
     - [x] Author
   - [x] The search bar should include:
     - [x] Text input field
-    - [ ] Submit/Search Button
-    - [ ] Clear Button
+    - [x] Submit/Search Button
+    - [x] Clear Button
   - [x] Playlists matching the search query in the text input are displayed in a grid view when the user:
     - [x] Presses the Enter Key
-    - [ ] Clicks the Submit/Search Button 
-  - [ ] User can click the clear button. When clicked:
-    - [ ] All text in the text input field is deleted
-    - [ ] All playlists in the `data.json` file are displayed in a grid view
+    - [x] Clicks the Submit/Search Button 
+  - [x] User can click the clear button. When clicked:
+    - [x] All text in the text input field is deleted
+    - [x] All playlists in the `data.json` file are displayed in a grid view
     - [x] **Optional:** If the Add Playlist, Edit Existing Playlist, or Delete Playlist stretch features were implemented:
       - [x] If users can add a playlist, added playlists should be included in search results.
       - [x] If users can edit a playlist, search results should reflect the latest edits to each playlist.
@@ -140,7 +140,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
