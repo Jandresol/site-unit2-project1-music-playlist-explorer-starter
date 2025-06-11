@@ -110,14 +110,7 @@ function renderPlaylists() {
 
         editButton.addEventListener("click", (e) => {
             e.stopPropagation();
-            const newName = prompt("Enter new playlist name:", playlist.name);
-            if (newName && newName.trim() !== "") {
-                playlist.name = newName;
-                card.querySelector(".playlist-title").textContent = newName;
-                if (currentPlaylist === playlist) {
-                    document.getElementById('playlist-name').innerText = newName;
-                }
-            }
+            openEditPlaylistModal(playlist.id);
         });
 
         deleteButton.addEventListener("click", (e) => {
@@ -245,7 +238,8 @@ function msToMinSec(ms) {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// Playlist form modal
+// Add Playlist form modal
+let currentEditingPlaylistId = null;
 document.getElementById('add-playlist-btn').addEventListener('click', openAddPlaylistModal);
 document.getElementById('close-add-playlist').addEventListener('click', closeAddPlaylistModal);
 document.getElementById('cancel-playlist').addEventListener('click', closeAddPlaylistModal);
@@ -290,19 +284,6 @@ function removeSongInput(button) {
     button.closest('.song-input-group').remove();
 }
 
-// Image preview
-document.getElementById('playlist-image-input').addEventListener('input', function (e) {
-    const imageUrl = e.target.value;
-    const preview = document.getElementById('image-preview');
-    const previewImg = document.getElementById('preview-img');
-    if (imageUrl) {
-        previewImg.src = imageUrl;
-        preview.style.display = 'block';
-        previewImg.onerror = () => preview.style.display = 'none';
-    } else {
-        preview.style.display = 'none';
-    }
-});
 
 // Submit new playlist
 document.getElementById('add-playlist-form').addEventListener('submit', function (e) {
@@ -341,4 +322,148 @@ document.getElementById('add-playlist-form').addEventListener('submit', function
     renderPlaylists();
     closeAddPlaylistModal();
     alert(`Playlist "${playlistName}" created successfully with ${songs.length} song(s)!`);
+});
+
+// Edit Playlist form modal
+document.getElementById('close-edit-playlist').addEventListener('click', closeEditPlaylistModal);
+document.getElementById('cancel-edit').addEventListener('click', closeEditPlaylistModal);
+document.getElementById('edit-song-btn').addEventListener('click', editSongInput);
+document.querySelector('.save-btn').addEventListener('click', () => {
+    document.getElementById('edit-playlist-form').requestSubmit();
+});
+
+function openEditPlaylistModal(playlistId) {
+    const playlist = playlists.find(p => p.id === playlistId);
+    if (!playlist) {
+        alert('Playlist not found.');
+        return;
+    }
+
+    currentEditingPlaylistId = playlistId;
+    document.getElementById('editPlaylistModal').style.display = 'block';
+    
+    // Populate form with existing data
+    populateEditForm(playlist);
+}
+
+function closeEditPlaylistModal() {
+    document.getElementById('editPlaylistModal').style.display = 'none';
+    resetEditPlaylistForm();
+    currentEditingPlaylistId = null;
+}
+
+function resetEditPlaylistForm() {
+    document.getElementById('edit-playlist-form').reset();
+    document.getElementById('edit-songs-container').innerHTML = '';
+    document.getElementById('image-preview').style.display = 'none';
+}
+
+function populateEditForm(playlist) {
+    // Fill basic info
+    document.getElementById('edit-playlist-name-input').value = playlist.name;
+    document.getElementById('edit-playlist-author-input').value = playlist.creator;
+
+    // Clear existing song inputs
+    document.getElementById('edit-songs-container').innerHTML = '';
+
+    // Add song inputs for existing songs
+    playlist.songs.forEach(song => {
+        editSongInput(song.title, song.artist);
+    });
+
+    // Add one empty input if no songs exist
+    if (playlist.songs.length === 0) {
+        editSongInput();
+    }
+}
+
+function editSongInput(title = '', artist = '') {
+    const songsContainer = document.getElementById('edit-songs-container'); // <-- FIXED
+    const songInputGroup = document.createElement('div');
+    songInputGroup.className = 'song-input-group';
+    songInputGroup.innerHTML = `
+        <button type="button" class="remove-song-btn" onclick="removeEditSongInput(this)">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="song-input-row">
+            <input type="text" placeholder="Song Title *" class="song-title-input" value="${title}" required>
+            <input type="text" placeholder="Artist *" class="song-artist-input" value="${artist}" required>
+        </div>
+    `;
+    songsContainer.appendChild(songInputGroup);
+}
+
+function removeEditSongInput(button) {
+    const songGroup = button.closest('.song-input-group');
+    songGroup.remove();
+}
+
+
+document.getElementById('edit-playlist-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (currentEditingPlaylistId === null) {
+        alert('No playlist selected for editing.');
+        return;
+    }
+
+    const playlistName = document.getElementById('edit-playlist-name-input').value.trim();
+    const playlistAuthor = document.getElementById('edit-playlist-author-input').value.trim();
+
+    // Collect songs
+    const songInputs = document.querySelectorAll('#edit-songs-container .song-input-group');
+    const songs = [];
+
+    songInputs.forEach(songGroup => {
+        const title = songGroup.querySelector('.song-title-input').value.trim();
+        const artist = songGroup.querySelector('.song-artist-input').value.trim();
+        
+        if (title && artist) {
+            songs.push({
+                title: title,
+                artist: artist,
+                album: 'Album',
+                duration: '3:30',
+            });
+        }
+    });
+
+    // Validation
+    if (!playlistName || !playlistAuthor) {
+        alert('Please fill in all required fields (Name and Author).');
+        return;
+    }
+
+    if (songs.length === 0) {
+        alert('Please add at least one song to the playlist.');
+        return;
+    }
+
+    // Find and update the playlist
+    const playlistIndex = playlists.findIndex(p => p.id === currentEditingPlaylistId);
+    if (playlistIndex === -1) {
+        alert('Playlist not found.');
+        return;
+    }
+
+    // Update playlist data (preserve id and likes)
+    playlists[playlistIndex] = {
+        ...playlists[playlistIndex],
+        name: playlistName,
+        creator: playlistAuthor,
+        imageUrl: playlists[playlistIndex].imageUrl,
+        songs: songs
+    };
+
+    // Update filtered playlists
+    filteredPlaylists = [...playlists];
+
+    // Re-render playlists
+    renderPlaylists();
+
+    // Close modal and reset form
+    closeEditPlaylistModal();
+
+    // Show success message
+    alert(`Playlist "${playlistName}" updated successfully with ${songs.length} song(s)!`);
 });

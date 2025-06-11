@@ -142,6 +142,48 @@
                 </form>
             </div>
         </div>
+        <div id="editPlaylistModal" class="modal">
+            <div class="modal-content edit-playlist-modal">
+                <span class="close" id="close-edit-playlist">&times;</span>
+                <h2 style="margin-bottom: 2rem; color: #333; text-align: center;">Create New Playlist</h2>
+                
+                <form id="edit-playlist-form">
+                    <div class="form-section">
+                        <h3>Playlist Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="edit-playlist-name-input">Playlist Name *</label>
+                            <input type="text" id="edit-playlist-name-input" required placeholder="Enter playlist name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="edit-playlist-author-input">Author *</label>
+                            <input type="text" id="edit-playlist-author-input" required placeholder="Enter author name">
+                        </div>
+                        
+                    </div>
+                    <div class="form-section">
+                        <div class="songs-header">
+                            <h3>Songs</h3>
+                            <button type="button" id="edit-song-btn" class="edit-song-button">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Song
+                            </button>
+                        </div>
+                        
+                        <div id="edit-songs-container">
+                            <!-- Songs will be added here dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancel-edit" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Playlist</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
 
         <footer>
