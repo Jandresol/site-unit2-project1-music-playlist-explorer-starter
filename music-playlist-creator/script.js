@@ -269,7 +269,7 @@ function addSongInput() {
     const songInputGroup = document.createElement('div');
     songInputGroup.className = 'song-input-group';
     songInputGroup.innerHTML = `
-        <button type="button" class="remove-song-btn" onclick="removeSongInput(this)">
+        <button type="button" class="remove-song-btn">
             <i class="fa-solid fa-times"></i>
         </button>
         <div class="song-input-row">
@@ -278,10 +278,11 @@ function addSongInput() {
         </div>
     `;
     songsContainer.appendChild(songInputGroup);
-}
+    const removeBtn = songInputGroup.querySelector('.remove-song-btn');
+    removeBtn.addEventListener('click', () => {
+        songInputGroup.remove();
+    });
 
-function removeSongInput(button) {
-    button.closest('.song-input-group').remove();
 }
 
 
@@ -376,13 +377,12 @@ function populateEditForm(playlist) {
         editSongInput();
     }
 }
-
 function editSongInput(title = '', artist = '') {
     const songsContainer = document.getElementById('edit-songs-container'); // <-- FIXED
     const songInputGroup = document.createElement('div');
     songInputGroup.className = 'song-input-group';
     songInputGroup.innerHTML = `
-        <button type="button" class="remove-song-btn" onclick="removeEditSongInput(this)">
+        <button type="button" class="remove-song-btn">
             <i class="fa-solid fa-times"></i>
         </button>
         <div class="song-input-row">
@@ -391,11 +391,12 @@ function editSongInput(title = '', artist = '') {
         </div>
     `;
     songsContainer.appendChild(songInputGroup);
-}
+    
+    const removeBtn = songInputGroup.querySelector('.remove-song-btn');
+        removeBtn.addEventListener('click', () => {
+            songInputGroup.remove();
+    });
 
-function removeEditSongInput(button) {
-    const songGroup = button.closest('.song-input-group');
-    songGroup.remove();
 }
 
 
