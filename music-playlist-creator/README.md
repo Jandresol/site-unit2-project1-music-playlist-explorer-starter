@@ -6,7 +6,7 @@ Submitted by: **Jasmine Andresol**
 
 Estimated time spent: **12** hours spent in total
 
-Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD_LINK_HERE)
+Deployed Application (**required**): [Music Playlist Explorer Deployed Site](https://jandresol.github.io/site-unit2-project1-music-playlist-explorer-starter/music-playlist-creator/index.html)
 
 ### Application Features
 
@@ -96,8 +96,8 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
     - [x] Songs
   - [x] The playlist grid view and playlist detail modal should update to display any changes (see Required Features, Criterion 1 & 2).
   - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** For ease of grading, please show yourself:
-    - [ ] Editing all of a playlist's features (name, creator, AND songs)
-    - [ ] Editing some of a playlist's features (name, creator, OR songs) 
+    - [x] Editing all of a playlist's features (name, creator, AND songs)
+    - [x] Editing some of a playlist's features (name, creator, OR songs) 
 
 - [x] **Delete Playlists**
   - [x] Add a delete button to each playlist tile within the grid view.
