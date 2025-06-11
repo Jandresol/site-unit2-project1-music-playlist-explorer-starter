@@ -2,7 +2,7 @@
     {
         "id": 1,
         "theme": "R&B",
-        "imageUrl": "assets/img/chill-vibe.png",
+        "imageUrl": "./assets/img/chill-vibe.png",
         "name": "R&B Chill Vibes",
         "creator": "Alex",
         "likes": 42,
@@ -20,7 +20,7 @@
     {
     "id": 2,
     "theme": "Hip‑Hop",
-    "imageUrl": "assets/img/hip-hop.jpg",
+    "imageUrl": "./assets/img/hip-hop.jpg",
     "name": "Hip‑Hop Grooves",
     "creator": "Jamie",
     "likes": 35,
@@ -42,7 +42,7 @@
   {
     "id": 3,
     "theme": "R&B",
-    "imageUrl": "assets/img/rnb.png",
+    "imageUrl": "./assets/img/rnb.png",
     "name": "Old‑School ’90s R&B",
     "creator": "Taylor",
     "likes": 40,
@@ -60,7 +60,7 @@
   {
     "id": 4,
     "theme": "Island",
-    "imageUrl": "assets/img/zouk-kompa.jpg",
+    "imageUrl": "./assets/img/zouk-kompa.jpg",
     "name": "Haitian Zouk Mix",
     "creator": "Riley",
     "likes": 28,
@@ -78,7 +78,7 @@
   {
     "id": 5,
     "theme": "Hip-Hop",
-    "imageUrl": "assets/img/boom-bap.jpg",
+    "imageUrl": "./assets/img/boom-bap.jpg",
     "name": "Boom‑Bap Classics",
     "creator": "Jordan",
     "likes": 37,
@@ -96,7 +96,7 @@
   {
     "id": 6,
     "theme": "Dance",
-    "imageUrl": "assets/img/house-dance.jpg",
+    "imageUrl": "./assets/img/house-dance.jpg",
     "name": "House & Dance Grooves",
     "creator": "Casey",
     "likes": 33,
@@ -114,7 +114,7 @@
   {
     "id": 7,
     "theme": "Dance",
-    "imageUrl": "assets/img/sunday.png",
+    "imageUrl": "./assets/img/sunday.png",
     "name": "Sunday Cleaning Vibes",
     "creator": "Sam",
     "likes": 48,
@@ -132,7 +132,7 @@
   {
     "id": 8,
     "theme": "R&B",
-    "imageUrl": "assets/img/soul.jpg",
+    "imageUrl": "./assets/img/soul.jpg",
     "name": "Neo‑Soul Essentials",
     "creator": "Taylor",
     "likes": 36,
