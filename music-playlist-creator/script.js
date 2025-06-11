@@ -127,17 +127,39 @@ function renderPlaylists() {
 }
 
 // Search
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    filteredPlaylists = playlists.filter(playlist =>
-        playlist.name.toLowerCase().includes(searchTerm) ||
-        playlist.creator.toLowerCase().includes(searchTerm) ||
-        playlist.songs.some(song =>
-            song.title.toLowerCase().includes(searchTerm) ||
-            song.artist.toLowerCase().includes(searchTerm)
-        )
-    );
+function performSearch() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+    
+    if (searchTerm === '') {
+        filteredPlaylists = [...playlists];
+    } else {
+        // Filter playlists based on search term
+        filteredPlaylists = playlists.filter(playlist =>
+            playlist.name.toLowerCase().includes(searchTerm) ||
+            playlist.creator.toLowerCase().includes(searchTerm) ||
+            playlist.songs.some(song =>
+                song.title.toLowerCase().includes(searchTerm) ||
+                song.artist.toLowerCase().includes(searchTerm)
+            )
+        );
+    }
     renderPlaylists();
+}
+
+function clearSearch() {
+    document.getElementById('search-input').value = '';
+    filteredPlaylists = [...playlists];
+    renderPlaylists();
+}
+
+// Event Listeners
+document.getElementById('search-submit-btn').addEventListener('click', performSearch);
+document.getElementById('search-clear-btn').addEventListener('click', clearSearch);
+document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch();
+    }
 });
 
 // Sort
@@ -261,7 +283,6 @@ function closeAddPlaylistModal() {
 function resetAddPlaylistForm() {
     document.getElementById('add-playlist-form').reset();
     document.getElementById('songs-container').innerHTML = '';
-    document.getElementById('image-preview').style.display = 'none';
 }
 
 function addSongInput() {
@@ -322,14 +343,14 @@ document.getElementById('add-playlist-form').addEventListener('submit', function
     filteredPlaylists = [...playlists];
     renderPlaylists();
     closeAddPlaylistModal();
-    alert(`Playlist "${playlistName}" created successfully with ${songs.length} song(s)!`);
+    showPopupMessage(`🎉 New playlist "${playlistName}" created with ${songs.length} song(s)!`);
 });
 
 // Edit Playlist form modal
 document.getElementById('close-edit-playlist').addEventListener('click', closeEditPlaylistModal);
 document.getElementById('cancel-edit').addEventListener('click', closeEditPlaylistModal);
-document.getElementById('edit-song-btn').addEventListener('click', editSongInput);
-document.querySelector('.save-btn').addEventListener('click', () => {
+document.getElementById('edit-song-btn').addEventListener('click', () => editSongInput());
+document.getElementById('save-btn').addEventListener('click', () => {
     document.getElementById('edit-playlist-form').requestSubmit();
 });
 
@@ -356,7 +377,6 @@ function closeEditPlaylistModal() {
 function resetEditPlaylistForm() {
     document.getElementById('edit-playlist-form').reset();
     document.getElementById('edit-songs-container').innerHTML = '';
-    document.getElementById('image-preview').style.display = 'none';
 }
 
 function populateEditForm(playlist) {
@@ -466,7 +486,19 @@ document.getElementById('edit-playlist-form').addEventListener('submit', functio
     closeEditPlaylistModal();
 
     // Show success message
-    alert(`Playlist "${playlistName}" updated successfully with ${songs.length} song(s)!`);
+    showPopupMessage(`Playlist "${playlistName}" updated successfully with ${songs.length} song(s)!`);
 });
 
 window.togglePlay = togglePlay;
+
+function showPopupMessage(message) {
+    const popup = document.getElementById('popup-message');
+    popup.textContent = message;
+    popup.classList.remove('hidden');
+    popup.classList.add('show');
+
+    setTimeout(() => {
+        popup.classList.remove('show');
+        setTimeout(() => popup.classList.add('hidden'), 400); // Wait for fade-out transition
+    }, 3000); // Show for 3 seconds
+}

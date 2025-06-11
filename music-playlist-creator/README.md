@@ -116,7 +116,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
     - [ ] Clicks the Submit/Search Button 
   - [ ] User can click the clear button. When clicked:
     - [ ] All text in the text input field is deleted
-    - [x] All playlists in the `data.json` file are displayed in a grid view
+    - [ ] All playlists in the `data.json` file are displayed in a grid view
     - [x] **Optional:** If the Add Playlist, Edit Existing Playlist, or Delete Playlist stretch features were implemented:
       - [x] If users can add a playlist, added playlists should be included in search results.
       - [x] If users can edit a playlist, search results should reflect the latest edits to each playlist.

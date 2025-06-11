@@ -47,6 +47,14 @@
                 <div class="search-bar">
                     <i class="fa-solid fa-search"></i>
                     <input type="text" id="search-input" placeholder="Search playlists, songs, or artists...">
+                    <button type="button" id="search-submit-btn" class="search-btn submit-btn">
+                        <i class="fa-solid fa-search"></i>
+                        Search
+                    </button>
+                    <button type="button" id="search-clear-btn" class="search-btn clear-btn">
+                        <i class="fa-solid fa-times"></i>
+                        Clear
+                    </button>
                 </div>
                 <div class="controls">
                     <select id="sort-dropdown">
@@ -75,12 +83,6 @@
                         </div>
                     </div>
                     <div class="controls">
-                        <select id="sort-dropdown">
-                            <option value="default">Sort by...</option>
-                            <option value="name">Name (A-Z)</option>
-                            <option value="creator">Creator</option>
-                            <option value="likes">Most Liked</option>
-                        </select>
                         <button id="shuffle-button">
                             <i class="fa-solid fa-shuffle"></i>
                             Shuffle
@@ -96,7 +98,7 @@
         <div id="addPlaylistModal" class="modal">
             <div class="modal-content add-playlist-modal">
                 <span class="close" id="close-add-playlist">&times;</span>
-                <h2 style="margin-bottom: 2rem; color: #333; text-align: center;">Create New Playlist</h2>
+                <h2 style="margin-bottom: 2rem; color: #333; text-align: center;">Edit Playlist</h2>
                 
                 <form id="add-playlist-form">
                     <div class="form-section">
@@ -115,9 +117,6 @@
                         <div class="form-group">
                             <label for="playlist-image-input">Cover Image URL</label>
                             <input type="url" id="playlist-image-input" placeholder="Enter image URL (optional)">
-                            <div class="image-preview" id="image-preview" style="display: none;">
-                                <img id="preview-img" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px; margin-top: 10px;">
-                            </div>
                         </div>
                     </div>
 
@@ -165,7 +164,7 @@
                     <div class="form-section">
                         <div class="songs-header">
                             <h3>Songs</h3>
-                            <button type="button" id="edit-song-btn" class="edit-song-button">
+                            <button type="button" id="edit-song-btn" class="add-song-button">
                                 <i class="fa-solid fa-plus"></i>
                                 Add Song
                             </button>
@@ -178,14 +177,12 @@
 
                     <div class="form-actions">
                         <button type="button" id="cancel-edit" class="cancel-btn">Cancel</button>
-                        <button type="submit" class="save-btn">Save Playlist</button>
+                        <button type="submit" class="create-btn" id="save-btn">Save Playlist</button>
                     </div>
                 </form>
             </div>
         </div>
-
-
-
+        <div id="popup-message" class="popup hidden"></div>
         <footer>
         </footer>
         <script type="module" src="script.js"></script>
