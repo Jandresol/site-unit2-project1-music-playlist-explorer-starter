@@ -6,6 +6,9 @@ Submitted by: **Jasmine Andresol**
 
 Estimated time spent: **12** hours spent in total
 
+**Important Note:**
+The deployed application has issues with loading the song playlists as well as shaving functional play buttons as the APIs are not integrated within github pages.
+
 Deployed Application (**required**): [Music Playlist Explorer Deployed Site](https://jandresol.github.io/site-unit2-project1-music-playlist-explorer-starter/music-playlist-creator/index.html)
 
 ### Application Features
