@@ -70,7 +70,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](htt
   - [x] When the page is refreshed or reloaded, a new random playlist is displayed
     - For example, navigating to the all playlists page and then back to the featured playlist page should result in a new random playlist being displayed
     - Note that because your algorithm will not be truly random, it is possible that the same playlist will feature twice in a row. 
-    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself refreshing the featured page more than once. 
+    - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself refreshing the featured page more than once. 
   - [x] Application includes a navigation bar or some other mechanism such that users can navigate to the page with all playlists from the featured page and vice versa without using the browser's back and forward buttons. 
 
 #### STRETCH FEATURES
@@ -132,28 +132,36 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](htt
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video actually renders and is playable when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+`https://www.loom.com/share/0c8abcd901094b6591cd19ac66c486b6?sid=8e3aad39-2a41-4918-a0e8-696d7071ad04` Add the embedded URL code to your animated app walkthrough below, <div>
+    <a href="https://www.loom.com/share/0c8abcd901094b6591cd19ac66c486b6">
+      <p>Music Playlist Explorer - Jasmine Andresol - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/0c8abcd901094b6591cd19ac66c486b6">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/0c8abcd901094b6591cd19ac66c486b6-f9d7be57ec0eea98-full-play.gif">
+    </a>
+  </div>. Make sure the video actually renders and is playable when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Lesson 1 and 2 were great for introducing us to JavaScript and the DOM model. Prior to this, I wasn't the most comfortable with JavaScript. Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional.
-The in class demo
-* If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-  
-I would have spent more time planning out my javascript, specifically focusing on reusability of functions and best practices for the design and implementation of my code. I found that for instance the edit and add modal functionality was redundant, so maybe finding a way to better structure those functions.
-
-* Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
+Lesson 1 and 2 were great for introducing us to JavaScript and the DOM model. Prior to this, I wasn't the most comfortable with JavaScript. Lesson 3, where we discussed how to fetch and configure APIs through get requests were the most helpful in making the website functional. The in class demo was the most helpful as it gave great boiler plate code on how to integrate the frontend with the json file.
 
 I had a lot of trouble with understanding the HTTP get requests and handing the timing of actions, such as whether or not to use async or await. I also had issues with some functionality that were not loading, so I had to fix it by experimenting with the scope of some functions. For the stretch features, I relied a lot on external sources, I think in the future taking the time to see if I can rely less on documentation and video tutorials for some of the code.
 
+
+* If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
+  
+I would have spent more time planning out my javascript, specifically focusing on reusability of functions and best practices for the design and implementation of my code. I found that for instance the edit and add modal functionality was redundant, so maybe finding a way to better structure those functions. In terms of additional features, I would have improved music playback features and ensured that the music played on click. As a stretch I would have added different user profiles.
+
+* Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
+
+I felt that I was nervous in presenting. In the project demo, my spotify API request timed out, as it only lasts for an hour, so none of the playlist songs were showing, so I had to regenerate the key on the spot. Using npm will make things a lot easier as I can use the SpotifySDK to work through those issues. I noticed that two of my teammates were able to get music playing, which is something I aspired to acheive. I think not getting too stuck on specific features, and looking at the big picture of the project would have helped me for the future, for instance I had a lot of trouble wrangling with the API which could have led to time spent elsewhere.
+
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+I used the Spotify API to load song images, song durations and album names.
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Thank you to Lucia, Keith and Alex for helping me work through some of my issues and giving me pointers on how to design some of the features
